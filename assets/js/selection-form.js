@@ -56,16 +56,3 @@ $( function() {
       source: stateNames,
     });
   } );
-
-//   transportation
-  $( function() {
-    const transportation = [
-        'car',
-        'public transportation',
-        'bike',
-        'walk',
-      ];
-    $( "#transportation" ).autocomplete({
-      source: transportation,
-    });
-  } );
