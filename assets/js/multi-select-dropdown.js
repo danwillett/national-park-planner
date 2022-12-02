@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("#test").CreateMultiCheckBox({ width: '230px', defaultText : 'Select Below', height:'250px' });
+    $("#select-activities").CreateMultiCheckBox({ width: '230px', defaultText : 'Select Below', height:'250px' });
 });
 
 $(document).ready(function () {
