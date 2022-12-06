@@ -23,7 +23,8 @@ function makeFeatures(object) {
 
     var addFeature = new ol.Feature({
       geometry: new ol.geom.Point(ol.proj.fromLonLat([longitude, latitude])),
-      name: parkName,    
+      name: parkName,
+      url: object.data[i].url    
     });
   
   parkPins[parkName] = addFeature
@@ -49,47 +50,40 @@ fetch(parkBaseUrl + '/parks?parkCode=' + String(parks) + apiParam)
 
 console.log(parkPins)
 
-
-// var p1 = new Feature({
-//   geometry: new Point(fromLonLat([-119.9112735, 33.98680093])),
-//   name: 'park',
-// });
 function generateMap() { 
-new ol.Map({
+var map = new ol.Map({
   layers: [
     new ol.layer.Tile({ source: new ol.source.OSM() }),
     new ol.layer.Vector({
       source: new ol.source.Vector({
         features: Object.values(parkPins)
-      }) //,
-      //   style: new Style({
-      //     image: new Icon({
-      //       // // anchor: [0.5, 46],
-      //       // anchorXUnits: 'fraction',
-      //       // anchorYUnits: 'pixels',
-      //       src: 'https://png.pngtree.com/png-vector/20190903/ourmid/pngtree-map-location-marker-icon-in-red-png-image_1722078.jpg',
-      //       scale: 0.1
-      //     })
-      //   })
+      }),
+        style: new ol.style.Style({
+          image: new ol.style.Icon({
+            anchor: [0.5, 1],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'fraction',
+            src: './images/map-icon.png',
+            scale: 0.03
+          })
+        })
     })
   ],
   view: new ol.View({
-    center: [0, 0],
-    zoom: 2,
+    center: ol.proj.fromLonLat([-100.622990, 48.223772]),
+    zoom: 3,
   }),
   target: 'map',
 });
 
-
+map.getViewport().addEventListener("click", function(e) {
+    map.forEachFeatureAtPixel(map.getEventPixel(e), function (feature, layer) {
+        console.log(feature)
+        var link = feature.values_.url;
+        window.open(link, '_blank')
+        //do something
+    });
+});
 }
 
 
-// var labelCoords = [33.98680093,-119.9112735];
-
-// const feature = new Feature({
-//   // geometry: new Polygon(polyCoords),
-//   labelPoint: new Point(labelCoords),
-//   name: 'My Polygon',
-// });
-
-// lat:33.98680093, long:-119.9112735
