@@ -3,7 +3,7 @@
 # Resources
 [multi-choice dropdown](https://www.codeproject.com/Tips/5162015/Multi-select-Check-Box-List-or-Checkbox-Dropdown-w)
 
-Foudations
+Foudation
 [select menu](https://get.foundation/sites/docs/forms.html)
 [modal]
 
