@@ -48,25 +48,8 @@
                 planning from there!</p>
             <p>Need a little more guidance? Not a problem. We can help you to find the National Park to fit your preferred level of adventure</p>
 
-            <!-- get started -->
-            <section id="enter-park-name">
-                <h3>Know which National Park you want to visit?</h3>
-                <p>Select the name below and away we go!</p>
-                <!-- select park name: drop down -->
-                <label for="national-parks">
-                    <select>
-                        <!-- these are just filler values for now, replace with park names -->
-                        <!-- add names with JS? -->
-                        <option value="husker">Husker</option>
-                        <option value="starbuck">Starbuck</option>
-                        <option value="hotdog">Hot Dog</option>
-                        <option value="apollo">Apollo</option>
-                    </select>
-                </label>
-            </section>
-
             <section>
-                <h3>Still deciding? Let us help you decide where to go.</h3>
+                <h3>Let us help you decide where to go.</h3>
                 <!-- enter a state: autocomplete -->
                 <p>Enter the name of a state below to get started.</p>
                 <div id="choose-a-state" class="ui-widget">
@@ -76,7 +59,7 @@
 
                 <!-- by distance: drop down menu -->
                 <!-- should this be drop down or just an input? -->
-                <p>Or, let us know how far you're willing to travel.</p>
+                <!-- <p>Or, let us know how far you're willing to travel.</p>
                 <label for="distance-traveled">
                     <select>
                         <option value="closest">closest</option>
@@ -86,9 +69,9 @@
                         <option value="farther">farther</option>
                         <option value="farthest">farthest</option>
                     </select>
-                </label>
+                </label> -->
 
-                <!-- mode of transportation: drop down menu -->
+                <!-- mode of transportation: drop down menu
                 <p>How will you be traveling?</p>
                 <select id="transportation">
                     <option value="car">car</option>
@@ -96,11 +79,11 @@
                     <option value="bike">bike</option>
                     <option value="walk">walk</option>
                 </select>
-                </label>
+                </label> -->
 
                 <!-- activities: drop down multi-select checkboxes -->
                 <p>What activities would you like to try on your trip?</p>
-                <select id="select-activities">
+                <select class="select-options">
                     <option value="1">add</option>
                     <option value="2">our</option>
                     <option value="3">own</option>
@@ -110,6 +93,20 @@
                     <option value="7">7</option>
                     <option value="8">8</option>
                 </select>
+
+                    <!-- activities: drop down multi-select checkboxes -->
+                    <p>amenities</p>
+                    <select class="select-options">
+                        <option value="1">add</option>
+                        <option value="2">our</option>
+                        <option value="3">own</option>
+                        <option value="4">items</option>
+                        <option value="5">here</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                    </select>
+                    
             </section>
         </section>
 
