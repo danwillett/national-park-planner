@@ -10,9 +10,11 @@
     <!-- stylesheets -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+        integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/style/selection-form.css" />
-    <link rel="stylesheet" href="./assets/style/multi-select-dropdown.css" />
+    <!-- <link rel="stylesheet" href="./assets/style/multi-select-dropdown.css" /> -->
 </head>
 
 <body>
@@ -83,17 +85,17 @@
                 </label> -->
 
                 <!-- activities: drop down multi-select checkboxes -->
-                <p>What activities would you like to try on your trip?</p>
-                <select class="select-options">
-                    <option value="1">add</option>
-                    <option value="2">our</option>
-                    <option value="3">own</option>
-                    <option value="4">items</option>
-                    <option value="5">here</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                </select>
+                <div class="input-field col s12">
+                    <select multiple>
+                        <p>What activities would you like to try on your trip?</p>
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="1">add</option>
+                        <option value="2">our</option>
+                        <option value="3">own</option>
+                    </select>
+                    <label>Select activities</label>
+                </div>
+
 
                 <!-- activities: drop down multi-select checkboxes -->
                 <p>amenities</p>
@@ -108,7 +110,7 @@
                     <option value="8">8</option>
                 </select>
 
-                <button class="button search">Search</button>
+                <button class="button search-btn">Search</button>
             </section>
         </section>
 
@@ -130,9 +132,10 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/nps-api.js"></script>
     <script src="./assets/js/selection-form.js"></script>
-    <script src="./assets/js/multi-select-dropdown.js"></script>
+    <!-- <script src="./assets/js/multi-select-dropdown.js"></script> -->
 </body>
 
 </html>
