@@ -13,42 +13,62 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="./assets/style/selection-form.css" />
     <link rel="stylesheet" href="./assets/style/multi-select-dropdown.css" />
+    <link rel="stylesheet" href="./assets/style/style.css" />
 </head>
 
 <body>
-    <header>
+    <header class="hero-section">
         <!-- working title and tagline, feel free to make suggestions -->
-        <h1>outdoorsyISH</h1>
-        <h3>Your indoorsy guide to the Great Outdoors.</h3>
+        <div class="hero-section-text">
+            <h1>outdoorsyISH</h1>
+            <h3>Your indoorsy guide to the Great Outdoors</h3>
+        </div>
         <!-- I'm imagining a hero image with the title and tagline overlaid -->
-        <nav>
-            <ul>
-                <!-- add nav links here -->
-                <li>Welcome</li>
-                <li>Plan Your Adventure</li>
-                <li></li>
-            </ul>
-        </nav>
+        
     </header>
 
+    <nav class="top-bar topbar-responsive" id="nav">
+        <div class="top-bar-title">
+          <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
+            <button class="menu-icon" type="button" data-toggle></button>
+          </span>
+          <a class="topbar-responsive-logo" href="#"><strong>outdoorsyISH</strong></a>
+        </div>
+        <div id="topbar-responsive" class="topbar-responsive-links">
+          <div class="top-bar-right">
+            <ul class="menu simple vertical medium-horizontal">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Plan Your Adventure</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
     <main>
+        <!-- map -->
+        <section> 
+            <div class="responsive-embed" id="map">
+                <iframe width="420" height="315" src="file:///Users/marissathompson/bootcamp/national-park-planner/assets/mapping-parks/map.html" frameborder="0" allowfullscreen></iframe>
+              </div>
+        </section>
+
         <!-- welcome + about us -->
-        <section id="welcome">
-            <h2>Welcome to outdoorsyISH!</h2>
+        <section class="main-content" id="welcome">
+            <h2 class="main-content">Welcome to outdoorsyISH!</h2>
             <!-- Feel free to edit my copy, this is just a rough draft and I welcome feedback and suggestions! -->
-            <p>outdoorsyISH is <i>the</i> spot to plan your next National Parks adventure. Not a hiker? Can't stand
+            <p class="main-content">outdoorsyISH is <i>the</i> spot to plan your next National Parks adventure. Not a hiker? Can't stand
                 camping? We'll help you find comfortable lodging, tasty restaurants, and plenty of indoor <i>and</i>
                 outdoor activities to suit your needs. So let's get packing!</p>
         </section>
 
         <!-- trip planner -->
-        <section id="plan-your-trip">
+        <section class="main-content" id="plan-your-trip" >
             <h2>Plan your adventure(ish)</h2>
             <p>Already know where you want to go? Great! Simply select your park from the available list and keep
                 planning from there!</p>
             <p>Need a little more guidance? Not a problem. We can help you to find the National Park to fit your preferred level of adventure</p>
 
-            <section>
+            <section class="main-content">
                 <h3>Let us help you decide where to go.</h3>
                 <!-- enter a state: autocomplete -->
                 <p>Enter the name of a state below to get started.</p>
@@ -82,7 +102,7 @@
                 </label> -->
 
                 <!-- activities: drop down multi-select checkboxes -->
-                <p>What activities would you like to try on your trip?</p>
+                <p class="main-content">What activities would you like to try on your trip?</p>
                 <select class="select-options">
                     <option value="1">add</option>
                     <option value="2">our</option>
@@ -95,7 +115,7 @@
                 </select>
 
                     <!-- activities: drop down multi-select checkboxes -->
-                    <p>amenities</p>
+                    <p class="main-content">amenities</p>
                     <select class="select-options">
                         <option value="1">add</option>
                         <option value="2">our</option>
@@ -113,12 +133,28 @@
     </main>
 
     <!-- footer -->
+
+    <footer class="social-footer">
+        <div class="social-footer-left">
+          <a href="#"><img class="logo" src="https://placehold.it/150x30"></a>
+        </div>
+        <div class="social-footer-icons">
+          <ul class="menu simple">
+            <li><a href="https://www.facebook.com/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.instagram.com/?hl=en"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.pinterest.com/"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+            <li><a href="https://twitter.com/?lang=en"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </footer>
+      
+          
+
     <footer>
         <h4>outdoorsyISH</h4>
-        <nav>
+        <nav class="footer-nav">
             <li>Welcome</li>
             <li>Plan Your Adventure</li>
-            <li></li>
         </nav>
     </footer>
 
