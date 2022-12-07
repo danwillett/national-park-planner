@@ -1,4 +1,3 @@
-// States
 $(function () {
   // const stateNames = [
   //   'Alabama',
@@ -55,8 +54,5 @@ $(function () {
   // $("#state-names").autocomplete({
   //   source: stateNames,
   // });
-
-
-  
 
 });
