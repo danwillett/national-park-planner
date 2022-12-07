@@ -1,22 +1,30 @@
 // import API key 
 import {
-    apiKeyNPS
+    apiKeyNPS,
+    stateInfo
 } from './config.js';
 
 //Global variables
+var pList = "";
 var activitesOffered = []; //activities offered by NPS
-var activitiesChosen = []; //activities a user is interested in 
 var parksForChosenActivity = []; //parks where a user can find their chosen activity
 var amenitiesOffered = []; //amenities offered by NPS
 var amenityCategories = []; //type of amenities
 var parksForChosenAmenity = []; //parks where a user can find their chosen amenity
+var finalParkList = []; //parks for a state with chosen sctivities and 
+
+var stateEl = $('#state-names');
+var activityEl = $('#activity-select');
+var amenityEl = $('#amenity-select');
+var submitBtn = $('#submit');
+var parkList = $('#park-list');
+var clearBtn = $('#clear');
 
 
 
 //Get the list of activities offered by NPS
 function getNPSActivities() {
     var requestURL = "https://developer.nps.gov/api/v1/activities?api_key=" + apiKeyNPS;
-
     console.log(requestURL);
 
     fetch(requestURL)
@@ -24,57 +32,35 @@ function getNPSActivities() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
-            // console.log("length = " + data.length);
-
-            for (var i = 0; i < data.data.length; i++) {
-                activitesOffered[i] = data.data[i].name;
-                console.log(activitesOffered[i]);
+            var activity = {
+                id: "",
+                name: ""
             }
-        });
-}
-
-//Get parks where chosen activities are available
-//This function takes as parameter a US state as location and a string variable which containa comma separated list of activities
-function getParksForChosenActivities(state, activityList) {
-    var requestURL = "https://developer.nps.gov/api/v1/activities/parks?q=" + activityList + "&api_key=" + apiKeyNPS;
-
-    console.log(requestURL);
-
-    fetch(requestURL)
-        .then(function (response) {
-            return response.json();
+            for (var i = 0; i < data.data.length; i++) {
+                activity = {
+                    id: data.data[i].id,
+                    name: data.data[i].name
+                }
+                activitesOffered[i] = activity;
+            }
         })
-        .then(function (data) {
-            console.log(data);
-            console.log("length = " + data.data.length);
+        .then(function () {
+            //populate the activities dropdown on form
+            for (var i = 0; i < activitesOffered.length; i++) {
+                var opt = $('<option>');
 
-            for (var i = 0; i < data.data.length; i++) {
-                console.log("For activity " + data.data[i].name);
-                var parkEl = {
-                    act: "",
-                    park: "",
-                    url: ""
-                }
-                for (var x = 0; x < data.data[i].parks.length; x++) {
-                    if (data.data[i].parks[x].states.match(state)) {
-                        parkEl = {
-                            act: data.data[i].name,
-                            park: data.data[i].parks[x].fullName,
-                            url: data.data[i].parks[x].url
-                        }
-                        console.log(parkEl);
-                        parksForChosenActivity[parksForChosenActivity.length] = parkEl;
-                    }
-                }
+                opt.attr('value', activitesOffered[i].id);
+                opt.text(activitesOffered[i].name);
+                activityEl.append(opt);
             }
         });
 }
+
+
 
 //get amenities list along with its id and category
 function getNPSAmenities() {
-    var requestURL = "https://developer.nps.gov/api/v1/amenities?api_key=" + apiKeyNPS;
-
+    var requestURL = "https://developer.nps.gov/api/v1/amenities?limit=130&api_key=" + apiKeyNPS;
     console.log(requestURL);
 
     fetch(requestURL)
@@ -82,8 +68,6 @@ function getNPSAmenities() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
-            // console.log("length = " + data.length);
 
             var amenity = {
                 id: "",
@@ -103,7 +87,6 @@ function getNPSAmenities() {
                         category: data.data[i].categories[j]
                     }
                     amenitiesOffered[i] = amenity;
-                    console.log(amenitiesOffered[i]);
 
                     //if category doesnot exist in amenityCategories array then add it
                     var exist = false;
@@ -118,66 +101,331 @@ function getNPSAmenities() {
                 }
 
             }
-            console.log(amenityCategories);
+        })
+        .then(function () {
+            //populate the activities dropdown on form
+            for (var i = 0; i < amenitiesOffered.length; i++) {
+                var opt = $('<option>');
+
+                opt.attr('value', amenitiesOffered[i].id);
+                opt.text(amenitiesOffered[i].name);
+                amenityEl.append(opt);
+            }
         });
 }
 
-function getAmenitiesForCategory(category){
+function getAmenitiesForCategory(category) {
     var amenities = [];
 
-    for(var i = 0; i < amenitiesOffered.length; i++){
-        if(amenitiesOffered[i].category === category)   
+    for (var i = 0; i < amenitiesOffered.length; i++) {
+        if (amenitiesOffered[i].category === category)
             amenities[amenities.length] = amenitiesOffered[i].name;
     }
 
     return amenities;
 }
 
-function getParksForChosenAmenity(state, amenityIds){
-    var requestURL = "https://developer.nps.gov/api/v1/amenities/parksplaces?id=" + amenityIds + "&api_key=" + apiKeyNPS;
-
-    console.log(requestURL);
-
-    fetch(requestURL)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);
-            console.log("length = " + data.data.length);
-
-            for (var i = 0; i < data.data.length; i++) {
-                var temp = {
-                 tarr:[]
-                };
-                temp.tarr = data.data[i];
-                console.log("For amenity " + temp.tarr);
-                var parkEl = {
-                    act: "",
-                    park: "",
-                    url: ""
+//Get parks from data returned from API for activities
+function getParksForChosenActivity(state, data) {
+    for (var i = 0; i < data.data.length; i++) {
+        var parkEl = {
+            act: "",
+            park: "",
+            parkCode: "",
+            url: ""
+        }
+        for (var x = 0; x < data.data[i].parks.length; x++) {
+            if (data.data[i].parks[x].states.match(state)) {
+                parkEl = {
+                    act: data.data[i].name,
+                    park: data.data[i].parks[x].fullName,
+                    parkCode: data.data[i].parks[x].parkCode,
+                    url: data.data[i].parks[x].url
                 }
-                for (var x = 0; x < data.data[i].parks.length; x++) {
-                    if (data.data[i].parks[x].states.match(state)) {
-                        parkEl = {
-                            act: data.data[i].name,
-                            park: data.data[i].parks[x].fullName,
-                            url: data.data[i].parks[x].url
-                        }
-                        console.log(parkEl);
-                        parksForChosenAmenity[parksForChosenAmenity.length] = parkEl;
-                    }
-                }
+
+                parksForChosenActivity[parksForChosenActivity.length] = parkEl;
+
             }
-        });
-
+        }
+    }
+    console.log(parksForChosenActivity);
 }
 
-// getNPSActivities();
-//getParksForChosenActivities("CA", "swimming,tubing, hiking");
-// setInterval(getNPSAmenities(), 5000);
-// var amenities = getAmenitiesForCategory("Food");
-// console.log("Food amenities = " + amenities);  //amenities is not printed out
-getParksForChosenAmenity("CA", "04D29064-B9A1-4031-AD0E-98E31EF69604");  //don't know how to access object in array - no name
+//Get parks from data returned from API for amenities
+function getParksForChosenAmenity(state, data) {
+    for (var i = 0; i < data.data.length; i++) {
 
+        var parkEl = {
+            act: "",
+            park: "",
+            parkCode: "",
+            url: ""
+        }
+        for (var x = 0; x < data.data[i][0].parks.length; x++) {
+            if (data.data[i][0].parks[x].states.match(state)) {
+                parkEl = {
+                    amt: data.data[i][0].name,
+                    park: data.data[i][0].parks[x].fullName,
+                    parkCode: data.data[i][0].parks[x].parkCode,
+                    url: data.data[i][0].parks[x].url
+                }
+                parksForChosenAmenity[parksForChosenAmenity.length] = parkEl;
+            }
+        }
+    }
+    console.log(parksForChosenAmenity);
+}
+
+//Get all common parks when the user choose both activity and amenity.
+function getCommonParks() {
+    var parkEl = {
+        name: "",
+        code: "",
+        url: ""
+    }
+
+    for (var i = 0; i < parksForChosenActivity.length; i++) {
+        for (var j = 0; j < parksForChosenAmenity.length; j++) {
+            if (parksForChosenActivity[i].park === parksForChosenAmenity[j].park) {
+                parkEl = {
+                    park: parksForChosenAmenity[j].park,
+                    code: parksForChosenAmenity[j].parkCode,
+                    url: parksForChosenAmenity[j].url
+                }
+                //check if it already exists.  If not, add it
+                var exists = false;
+                for (var x = 0; x < finalParkList.length; x++) {
+                    if (parkEl.park === finalParkList[x].park)
+                        exists = true;
+                }
+                if (!exists) {
+                    finalParkList[finalParkList.length] = parkEl;
+                }
+            }
+
+        }
+    }
+}
+
+//Get all parks of the state - used when the user just give the state and do not choose any activity or amenity
+function getAllParksForState(data) {
+    var parkEl = {
+        park: "",
+        parkCode: "",
+        url: ""
+    }
+
+    for (var i = 0; i < data.data.length; i++) {
+
+        parkEl = {
+            park: data.data[i].fullName,
+            parkCode: data.data[i].parkCode,
+            url: data.data[i].url
+        }
+        finalParkList[finalParkList.length] = parkEl;
+    }
+}
+
+//create an unordered list to display the final list of parks after selection
+function displayFinalParkList() {
+
+    console.log(finalParkList);
+
+    //display final park list on HTMl page
+    if (pList !== "") {
+        pList.innerHTML = "";
+    }
+
+    pList = $('<ul>');
+    for (var x = 0; x < finalParkList.length; x++) {
+        var item = $('<li>');
+        var park = $('<a>');
+
+        park.attr('href', finalParkList[x].url);
+        park.attr('target', '_blank');
+        park.text(finalParkList[x].park);
+
+        item.append(park);
+        pList.append(item);
+    }
+    parkList.append(pList);
+}
+
+//This function will populate finalparkList with list of parks for chosen activites or ameties or both.  
+//If no activity or amenity is chosen, it will return the parks of the state.
+
+function findParks(state, activityList, amenityList) {
+
+    var requestURL = "";
+
+    //make sure all global arrays are empty
+    parksForChosenActivity.length = 0;
+    parksForChosenAmenity.length = 0;
+    finalParkList.length = 0;
+
+    //This condition will populate finalparkList with list of parks for chosen activites 
+    if (activityList.length !== 0 && amenityList.length === 0) {
+        requestURL = "https://developer.nps.gov/api/v1/activities/parks?q=" + activityList + "&api_key=" + apiKeyNPS;
+        console.log(requestURL);
+
+        fetch(requestURL)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+
+                getParksForChosenActivity(state, data);
+            })
+            .then(function () {
+                finalParkList = parksForChosenActivity;
+                displayFinalParkList();
+
+            });
+        //This condition will populate finalparkList with list of parks for chosen ameties.
+    } else if (activityList.length === 0 && amenityList.length !== 0) {
+        requestURL = "https://developer.nps.gov/api/v1/amenities/parksplaces?id=" + amenityList + "&api_key=" + apiKeyNPS;
+        console.log(requestURL);
+
+        fetch(requestURL)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                getParksForChosenAmenity(state, data);
+            })
+            .then(function () {
+                finalParkList = parksForChosenAmenity;
+                displayFinalParkList();
+            });
+        //This condition will populate finalparkList with list of all parks in state when the user do not choose any activity or amenity
+    } else if (activityList.length === 0 && amenityList.length === 0) {
+        requestURL = "https://developer.nps.gov/api/v1/parks?stateCode=" + state + "&api_key=" + apiKeyNPS;
+        console.log(requestURL);
+
+        fetch(requestURL)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                getAllParksForState(data);
+            })
+            .then(function () {
+                displayFinalParkList();
+            });
+        //This condition will populate finalparkList with list of parks for both chosen activites and ameties
+    } else {
+        requestURL = "https://developer.nps.gov/api/v1/activities/parks?q=" + activityList + "&api_key=" + apiKeyNPS;
+        console.log(requestURL);
+
+        fetch(requestURL)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                getParksForChosenActivity(state, data);
+            })
+            .then(function () {
+                requestURL = "https://developer.nps.gov/api/v1/amenities/parksplaces?id=" + amenityList + "&api_key=" + apiKeyNPS;
+                console.log(requestURL);
+
+                fetch(requestURL)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        getParksForChosenAmenity(state, data);
+                    })
+                    .then(function () {
+                        //get common parks which has both chosen activity and amenity
+                        getCommonParks();
+                        displayFinalParkList();
+                    });
+            });
+    }
+}
+
+submitBtn.on('click', function (event) {
+    event.preventDefault();
+
+    var state = stateEl.val();
+    if (state == "") {
+        console.log("State is a required field.  Please enter a valid state.");
+        return;
+    }
+    var stateCode = "";
+
+    finalParkList.length = 0;
+
+    for (var i = 0; i < stateInfo.length; i++) {
+        if (state === stateInfo[i].name)
+            stateCode = stateInfo[i].code;
+    }
+
+    var activities = activityEl.val();
+    var amenities = amenityEl.val();
+
+    findParks(stateCode, activities, amenities);
+
+    //store in local storage the last search
+    localStorage.clear();
+    var searchParams = {
+        state: stateCode,
+        activityList: activities,
+        amenityList: amenities
+    }
+    localStorage.setItem("lastSearch", JSON.stringify(searchParams));
+
+});
+
+// clear clear local storage, refresh page
+clearBtn.click(function (event) {
+    event.preventDefault();
+    localStorage.clear();
+    location.reload();
+})
+
+
+function restoreLastSearch(lastSearch) {
+    var stateCode = lastSearch.state;
+    var activities = lastSearch.activityList.toString();
+    var amenities = lastSearch.amenityList.toString();
+    var state = "";
+
+
+
+    for (var i = 0; i < stateInfo.length; i++) {
+        if (stateInfo[i].code === stateCode) {
+            state = stateInfo[i].name;
+        }
+    }
+
+    //set the state name in display
+    stateEl.text(state);
+    activityEl.val(activities);
+    amenityEl.val(amenities);
+
+    console.log("Restore..." + lastSearch.state + ";" + activities + ";" + amenities);
+
+    findParks(lastSearch.state, activities, amenities);
+}
+
+
+function init() {
+    //populate all activities provided by NPS
+    getNPSActivities();
+
+    //populate all amenities provided by NPS
+    getNPSAmenities();
+
+    //restore from local storage
+    var lastSearch = JSON.parse(localStorage.getItem("lastSearch"));
+
+    if (lastSearch !== null) {
+        restoreLastSearch(lastSearch);
+    }
+}
+
+
+
+init();
 

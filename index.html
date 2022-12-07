@@ -2,132 +2,232 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>outdoorsyISH</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,
+                    initial-scale=1.0" />
+    <title>
+        OutdoorsyIsh
+    </title>
 
-    <!-- stylesheets -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css"
+    <!-- foundation CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="./assets/style/selection-form.css" />
-    <link rel="stylesheet" href="./assets/style/multi-select-dropdown.css" />
+
+   <!-- jquery css -->
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+   <!-- jquery ui -->
+   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
+        integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+   <!-- jquery js -->
+   <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <!-- foundation js -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.1/dist/js/foundation.min.js" crossorigin="anonymous">
+    </script>
+    <!-- can look at combining these into one if desired -->
+    <link rel="stylesheet" href="assets/style/selection-form.css" />
+    <link rel="stylesheet" href="assets/style/multi-select-dropdown.css" />
+    <link rel="stylesheet" href="./assets/style/style.css" />
 </head>
 
 <body>
-    <header>
+    <header class="hero-section">
         <!-- working title and tagline, feel free to make suggestions -->
-        <h1>outdoorsyISH</h1>
-        <h3>Your indoorsy guide to the Great Outdoors.</h3>
-        <!-- I'm imagining a hero image with the title and tagline overlaid -->
-        <nav>
-            <ul>
-                <!-- add nav links here -->
-                <li>Welcome</li>
-                <li>Plan Your Adventure</li>
-                <li></li>
-            </ul>
-        </nav>
+        <div class="hero-section-text">
+            <h1>outdoorsyISH</h1>
+            <h3>Your indoorsy guide to the Great Outdoors</h3>
+        </div>
+
     </header>
 
+    <nav class="top-bar topbar-responsive" id="nav">
+        <div class="top-bar-title">
+          <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
+            <button class="menu-icon" type="button" data-toggle></button>
+          </span>
+          <a class="topbar-responsive-logo" href="#"><strong>outdoorsyISH</strong></a>
+        </div>
+        <div id="topbar-responsive" class="topbar-responsive-links">
+          <div class="top-bar-right">
+            <ul class="menu simple vertical medium-horizontal">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Plan Your Adventure</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
     <main>
+        <!-- map -->
+        <section> 
+            <div class="responsive-embed" id="map">
+                <iframe width="420" height="315" src="file:///Users/marissathompson/bootcamp/national-park-planner/assets/mapping-parks/map.html" frameborder="0" allowfullscreen></iframe>
+              </div>
+        </section>
+
         <!-- welcome + about us -->
-        <section id="welcome">
-            <h2>Welcome to outdoorsyISH!</h2>
+        <section class="main-content" id="welcome">
+            <h2 class="main-content">Welcome to outdoorsyISH!</h2>
             <!-- Feel free to edit my copy, this is just a rough draft and I welcome feedback and suggestions! -->
-            <p>outdoorsyISH is <i>the</i> spot to plan your next National Parks adventure. Not a hiker? Can't stand
+            <p class="main-content">outdoorsyISH is <i>the</i> spot to plan your next National Parks adventure. Not a hiker? Can't stand
                 camping? We'll help you find comfortable lodging, tasty restaurants, and plenty of indoor <i>and</i>
                 outdoor activities to suit your needs. So let's get packing!</p>
         </section>
 
         <!-- trip planner -->
-        <section id="plan-your-trip">
-            <h2>Plan your adventure(ish)</h2>
-            <p>Already know where you want to go? Great! Simply select your park from the available list and keep
-                planning from there!</p>
-            <p>Need a little more guidance? Not a problem. We can help you to find the National Park to fit your preferred level of adventure</p>
+        <section class="main-content" id="plan-your-trip" >
 
-            <section>
+            <h2>Plan your adventure(ish)</h2>
+            <p>Enter the name of the state you would like to visit in the form below to get started.</p>
+            <p>Need a little more guidance? Not a problem. Choose some activities and amenities as well and we'll help
+                you find a park to meet your needs.</p>
+
+            <section class="main-content">
                 <h3>Let us help you decide where to go.</h3>
                 <!-- enter a state: autocomplete -->
-                <p>Enter the name of a state below to get started.</p>
-                <div id="choose-a-state" class="ui-widget">
-                    <label for="state-names"></label>
-                    <input id="state-names">
+                <form>
+                    <div class="grid-container">
+                        <div class="grid-x grid-padding-x">
+                            <div class="medium-6 cell ui-widget" id="choose-a-state">
+                                <label for="state-names">Enter the name of a state you would like to visit:
+                                    <input id="state-names" type="text" placeholder="type state name here">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+                <!-- Select activities -->
+                <Section>
+                <h3 class="main-content">Select activities:</h3>
+                <button class="button" type="button" data-toggle="example-dropdown-right-top"
+                    id="selectActivities">Activities</button>
+                <div class="dropdown-pane" data-position="right" data-alignment="top" id="example-dropdown-right-top"
+                    data-dropdown data-auto-focus="true">
+                    <form>
+                        <label for="activities">
+                            <div>
+                                <fieldset class="large-7 cell" id="input">
+                                    <legend>Activity 1</legend>
+                                    <!-- add flex to ul -->
+                                    <ul class="grid-x" id="activity1">
+                                        <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox
+                                                1</label>
+                                        </li>
+                                        <li><input id="checkbox2" type="checkbox"><label for="checkbox1">Checkbox
+                                                2</label>
+                                        </li>
+                                        <li><input id="checkbox3" type="checkbox"><label for="checkbox1">Checkbox
+                                                3</label>
+                                        </li>
+                                    </ul>
+                                </fieldset>
+                            </div>
+                            <div>
+                                <fieldset class="large-7 cell" id="input">
+                                    <legend>Activity 2</legend>
+                                    <ul class="grid-x activity2">
+                                        <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox
+                                                1</label>
+                                        </li>
+                                        <li><input id="checkbox2" type="checkbox"><label for="checkbox1">Checkbox
+                                                2</label>
+                                        </li>
+                                        <li><input id="checkbox3" type="checkbox"><label for="checkbox1">Checkbox
+                                                3</label>
+                                        </li>
+                                    </ul>
+                                </fieldset>
+                            </div>
+                        </label>
+                    </form>
                 </div>
+                </section>
 
-                <!-- by distance: drop down menu -->
-                <!-- should this be drop down or just an input? -->
-                <!-- <p>Or, let us know how far you're willing to travel.</p>
-                <label for="distance-traveled">
-                    <select>
-                        <option value="closest">closest</option>
-                        <option value="closer">closer</option>
-                        <option value="close">close</option>
-                        <option value="far">far</option>
-                        <option value="farther">farther</option>
-                        <option value="farthest">farthest</option>
-                    </select>
-                </label> -->
+                <br>
 
-                <!-- mode of transportation: drop down menu
-                <p>How will you be traveling?</p>
-                <select id="transportation">
-                    <option value="car">car</option>
-                    <option value="public-transportation">public transportation</option>
-                    <option value="bike">bike</option>
-                    <option value="walk">walk</option>
-                </select>
-                </label> -->
+                <!-- Select amenitites -->
+                <button class="button" type="button" data-toggle="example-dropdown-right-top" id="selectAmenities">Amenities</button>
+                <div class="dropdown-pane" data-position="right" data-alignment="top" id="example-dropdown-right-top"
+                    data-dropdown data-auto-focus="true">
+                    <form>
+                        <label for="amenities">
+                            <fieldset class="large-7 cell" id="input">
+                                <legend>Amenity 1</legend>
+                                <ul class="grid-x amenity1">
+                                    <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
+                                    </li>
+                                    <li><input id="checkbox2" type="checkbox"><label for="checkbox1">Checkbox 2</label>
+                                    </li>
+                                    <li><input id="checkbox3" type="checkbox"><label for="checkbox1">Checkbox 3</label>
+                                    </li>
+                                </ul>
+                            </fieldset>
+                            <fieldset class="large-7 cell" id="input">
+                                <legend>Amenity 2</legend>
+                                <ul class="grid-x amenity2">
+                                    <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
+                                    </li>
+                                    <li><input id="checkbox2" type="checkbox"><label for="checkbox1">Checkbox 2</label>
+                                    </li>
+                                    <li><input id="checkbox3" type="checkbox"><label for="checkbox1">Checkbox 3</label>
+                                    </li>
+                                </ul>
+                            </fieldset>
+                        </label>
+                    </form>
+                </div>
+                </section>
 
-                <!-- activities: drop down multi-select checkboxes -->
-                <p>What activities would you like to try on your trip?</p>
-                <select class="select-options">
-                    <option value="1">add</option>
-                    <option value="2">our</option>
-                    <option value="3">own</option>
-                    <option value="4">items</option>
-                    <option value="5">here</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                </select>
+                <br>
 
-                    <!-- activities: drop down multi-select checkboxes -->
-                    <p>amenities</p>
-                    <select class="select-options">
-                        <option value="1">add</option>
-                        <option value="2">our</option>
-                        <option value="3">own</option>
-                        <option value="4">items</option>
-                        <option value="5">here</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                    </select>
-                    
+                <!-- Gets results -->
+                <button class="button" id="submit">Find Parks</button>
             </section>
+            <div id="park-list">
+                <p>List of parks:</p>
+            </div>
         </section>
 
     </main>
 
     <!-- footer -->
+
+    <footer class="social-footer">
+        <div class="social-footer-left">
+          <a href="#"><img class="logo" src="https://placehold.it/150x30"></a>
+        </div>
+        <div class="social-footer-icons">
+          <ul class="menu simple">
+            <li><a href="https://www.facebook.com/"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.instagram.com/?hl=en"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+            <li><a href="https://www.pinterest.com/"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+            <li><a href="https://twitter.com/?lang=en"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </footer>
+      
+          
+
     <footer>
         <h4>outdoorsyISH</h4>
         <nav>
             <li>Welcome</li>
             <li>Plan Your Adventure</li>
-            <li></li>
         </nav>
     </footer>
 
     <!-- script links -->
+    <script>$(document).foundation();</script>
+    <!-- not sure where all of these links should go? -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="./assets/js/nps-api.js"></script>
     <script src="./assets/js/selection-form.js"></script>
     <script src="./assets/js/multi-select-dropdown.js"></script>
 </body>
