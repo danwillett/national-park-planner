@@ -1,7 +1,6 @@
 var dropdown = $('.dropdown-pane');
 dropdown.attr('style', 'width: 75vw')
 
-
 // create list item elements for dropdown
 var activity1 =$('#activity1')
 var listItem = $('<li>')
@@ -16,5 +15,4 @@ listItem.append(checkbox);
 listItem.append(label);
 console.log(listItem.text());
 activity1.append(listItem)
-
 
