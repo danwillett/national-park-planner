@@ -94,11 +94,17 @@
             <section class="main-content">
                 <h3>Let us help you decide where to go.</h3>
                 <!-- enter a state: autocomplete -->
-                <p>Enter the name of a state below to get started.</p>
-                <div id="choose-a-state" class="ui-widget">
-                    <label for="state-names"></label>
-                    <input id="state-names">
-                </div>
+                <form>
+                    <div class="grid-container">
+                      <div class="grid-x grid-padding-x">
+                        <div class="medium-6 cell ui-widget" id="choose-a-state">
+                          <label for="state-names">Enter the name of a state you would like to visit:
+                            <input id="state-names" type="text" placeholder=".medium-6.cell">
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
 
                 <!-- Select activities -->
                 <Section>
@@ -112,7 +118,7 @@
                                 <fieldset class="large-7 cell" id="input">
                                     <legend>Activity 1</legend>
                                     <!-- add flex to ul -->
-                                    <ul class="grid-x activity1">
+                                    <ul class="grid-x" id="activity1">
                                         <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox
                                                 1</label>
                                         </li>
