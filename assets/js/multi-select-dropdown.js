@@ -4,6 +4,8 @@ console.log("dropdown: " + dropdown);
 dropdown.attr('style', 'width: 75vw')
 
 var input = $('#input');
+var dropdownList =$('<grid-x>')
+console.log(dropdownList);
 var checkbox = $('<input>');
 checkbox.attr('type', "checkbox");
 checkbox.attr('id', 'checkbox4');
