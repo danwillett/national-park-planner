@@ -2,3 +2,20 @@
     height: 400px;
     width: 100%;
 }
+
+
+/* #park-preview {
+    display:none;
+    height: 200px;
+    width: 200px;
+    
+} */
+
+.park-image {
+    width:100%;
+    height: 70%;
+    /* background-image: url("../images/beach-1.jpg"); */
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 1%;
+}
