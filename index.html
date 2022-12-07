@@ -158,8 +158,11 @@
                 <br>
 
                 <!-- Gets results -->
-                <button class="button search-btn">Find Parks</button>
+                <button class="button" id="submit">Find Parks</button>
             </section>
+            <div id="park-list">
+                <p>List of parks:</p>
+            </div>
         </section>
 
     </main>
@@ -177,8 +180,13 @@
     </footer>
 
     <!-- script links -->
-    <script>$(document).foundation();
-    </script>
+    <script>$(document).foundation();</script>
+    <!-- not sure where all of these links should go? -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="./assets/js/nps-api.js"></script>
     <script src="./assets/js/selection-form.js"></script>
     <script src="./assets/js/multi-select-dropdown.js"></script>
