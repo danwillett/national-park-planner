@@ -33,6 +33,13 @@
     padding: 10px 0;
   }
 
+  /*Map*/
+  .map {
+    height: 400px;
+    width: 100%;
+}
+
+
   /* nav bar */
 
 

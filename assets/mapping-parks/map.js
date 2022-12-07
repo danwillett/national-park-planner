@@ -5,6 +5,8 @@ var parks = ["acad", "chis", "fopo"];
 var parkNames = [];
 var parkPins = {};
 
+var parkList = [ {park:"yosemite", parkCode:"yose", url:"someurl"}, {}, {}]
+
 // function getCoordinates (selectedParks) {
 
 function makeFeatures(object) {
@@ -51,7 +53,7 @@ function makeFeatures(object) {
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
-        src: './images/map-icon.png',
+        src: './assets/mapping-parks/images/map-icon.png',
         scale: 0.03
       })
     })
@@ -116,7 +118,9 @@ fetch(parkBaseUrl + '/parks?parkCode=' + String(parks) + apiParam)
     return response.json();
 
   }).then(function (obj) {
-    console.log(obj.data.length)
+    console.log(obj.data.length);
+
+    console.log(finalParkList);
 
     makeFeatures(obj);
 
