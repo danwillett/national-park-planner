@@ -1,12 +1,4 @@
-var parkBaseUrl = 'https://@developer.nps.gov/api/v1'
-var apiParam = '&api_key=CrgafHnw6fYelIdITc4yR0KkwUU5rHWRnGKyi8xj';
-
-var parks = ["acad", "chis", "fopo"];
-var parkNames = [];
-var parkPins = {};
-
-// function getCoordinates (selectedParks) {
-
+// this function adds pin points for the filtered park locations to the map
 function makeFeatures(object) {
   console.log(object.data.length)
   var parkPins = {};
@@ -51,6 +43,7 @@ function makeFeatures(object) {
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
+        // src: './assets/mapping-parks/images/map-icon.png',
         src: './images/map-icon.png',
         scale: 0.03
       })
@@ -145,15 +138,7 @@ var map = new ol.Map({
 
 var parkList = [ {park:"yosemite", parkCode:"yose", url:"someurl"}, {park:"yosemite", parkCode:"chis", url:"someurl"}, {park:"yosemite", parkCode:"fopo", url:"someurl"}]
 
-  }).then(function (obj) {
-    console.log(obj.data.length)
-
-    makeFeatures(obj);
-
-  })
-// }
-
-
+addParksToMap(parkList)
 
 
 
