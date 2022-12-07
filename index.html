@@ -38,9 +38,8 @@
         <nav>
             <ul>
                 <!-- add nav links here -->
-                <li>Welcome</li>
-                <li>Plan Your Adventure</li>
-                <li></li>
+                <li><a href='#welcome'>Welcome</a></li>
+                <li><a href='#planYourAdventure'>Plan Your Adventure</a></li>
             </ul>
         </nav>
     </header>
@@ -56,11 +55,10 @@
         </section>
 
         <!-- trip planner -->
-        <section id="plan-your-trip">
+        <section id="planYourAdventure">
             <h2>Plan your adventure(ish)</h2>
-            <p>Ready to get started? Let's go?
-            <p>Need a little more guidance? Not a problem. We can help you to find the National Park to fit your
-                preferred level of adventure</p>
+            <p>Enter the name of the state you would like to visit in the form below to get started.</p>
+            <p>Need a little more guidance? Not a problem. Choose some activities and amenities as well and we'll help you find a park to meet your needs.</p>
 
             <section>
                 <h3>Let us help you decide where to go.</h3>
@@ -95,7 +93,8 @@
                 </select>
                 </label> -->
 
-                <button class="button" type="button" data-toggle="example-dropdown-right-top">Activities</button>
+                <!-- Select activities -->
+                <button class="button" type="button" data-toggle="example-dropdown-right-top" id="selectActivities">Activities</button>
                 <div class="dropdown-pane" data-position="right" data-alignment="top" id="example-dropdown-right-top"
                     data-dropdown data-auto-focus="true">
                     <form>
@@ -103,7 +102,8 @@
                             <div>
                                 <fieldset class="large-7 cell" id="input">
                                     <legend>Activity 1</legend>
-                                    <ul>
+                                    <!-- add flex to ul -->
+                                    <ul class="grid-x">
                                         <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox
                                                 1</label>
                                         </li>
@@ -116,11 +116,10 @@
                                     </ul>
                                 </fieldset>
                             </div>
-
                             <div>
                                 <fieldset class="large-7 cell" id="input">
                                     <legend>Activity 2</legend>
-                                    <ul>
+                                    <ul class="grid-x">
                                         <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox
                                                 1</label>
                                         </li>
@@ -133,19 +132,21 @@
                                     </ul>
                                 </fieldset>
                             </div>
-
                         </label>
                     </form>
                 </div>
+
                 <br>
-                <button class="button" type="button" data-toggle="example-dropdown-right-top">Amenities</button>
+
+                <!-- Select amenitites -->
+                <button class="button" type="button" data-toggle="example-dropdown-right-top" id="selectAmenities">Amenities</button>
                 <div class="dropdown-pane" data-position="right" data-alignment="top" id="example-dropdown-right-top"
                     data-dropdown data-auto-focus="true">
                     <form>
                         <label for="amenities">
                             <fieldset class="large-7 cell" id="input">
                                 <legend>Amenity 1</legend>
-                                <ul>
+                                <ul class="grid-x">
                                     <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
                                     </li>
                                     <li><input id="checkbox2" type="checkbox"><label for="checkbox1">Checkbox 2</label>
@@ -156,7 +157,7 @@
                             </fieldset>
                             <fieldset class="large-7 cell" id="input">
                                 <legend>Amenity 2</legend>
-                                <ul>
+                                <ul class="grid-x">
                                     <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
                                     </li>
                                     <li><input id="checkbox2" type="checkbox"><label for="checkbox1">Checkbox 2</label>
@@ -168,8 +169,11 @@
                         </label>
                     </form>
                 </div>
+
                 <br>
-                <button class="button search-btn">Search</button>
+                
+                <!-- Gets  -->
+                <button class="button search-btn">Find Parks</button>
             </section>
         </section>
 
@@ -181,7 +185,6 @@
         <nav>
             <li>Welcome</li>
             <li>Plan Your Adventure</li>
-            <li></li>
         </nav>
     </footer>
 
