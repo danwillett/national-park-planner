@@ -58,22 +58,23 @@
         <section id="planYourAdventure">
             <h2>Plan your adventure(ish)</h2>
             <p>Enter the name of the state you would like to visit in the form below to get started.</p>
-            <p>Need a little more guidance? Not a problem. Choose some activities and amenities as well and we'll help you find a park to meet your needs.</p>
+            <p>Need a little more guidance? Not a problem. Choose some activities and amenities as well and we'll help
+                you find a park to meet your needs.</p>
 
             <section>
                 <h3>Let us help you decide where to go.</h3>
                 <!-- enter a state: autocomplete -->
                 <form>
                     <div class="grid-container">
-                      <div class="grid-x grid-padding-x">
-                        <div class="medium-6 cell ui-widget" id="choose-a-state">
-                          <label for="state-names">Enter the name of a state you would like to visit:
-                            <input id="state-names" type="text" placeholder=".medium-6.cell">
-                          </label>
+                        <div class="grid-x grid-padding-x">
+                            <div class="medium-6 cell ui-widget" id="choose-a-state">
+                                <label for="state-names">Enter the name of a state you would like to visit:
+                                    <input id="state-names" type="text" placeholder=".medium-6.cell">
+                                </label>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </form>
+                </form>
 
                 <!-- by distance: drop down menu -->
                 <!-- should this be drop down or just an input? -->
@@ -100,7 +101,8 @@
                 </label> -->
 
                 <!-- Select activities -->
-                <button class="button" type="button" data-toggle="example-dropdown-right-top" id="selectActivities">Activities</button>
+                <button class="button" type="button" data-toggle="example-dropdown-right-top"
+                    id="selectActivities">Activities</button>
                 <div class="dropdown-pane" data-position="right" data-alignment="top" id="example-dropdown-right-top"
                     data-dropdown data-auto-focus="true">
                     <form>
@@ -109,7 +111,7 @@
                                 <fieldset class="large-7 cell" id="input">
                                     <legend>Activity 1</legend>
                                     <!-- add flex to ul -->
-                                    <ul class="grid-x activity1">
+                                    <ul class="grid-x" id="activity1">
                                         <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox
                                                 1</label>
                                         </li>
@@ -145,7 +147,8 @@
                 <br>
 
                 <!-- Select amenitites -->
-                <button class="button" type="button" data-toggle="example-dropdown-right-top" id="selectAmenities">Amenities</button>
+                <button class="button" type="button" data-toggle="example-dropdown-right-top"
+                    id="selectAmenities">Amenities</button>
                 <div class="dropdown-pane" data-position="right" data-alignment="top" id="example-dropdown-right-top"
                     data-dropdown data-auto-focus="true">
                     <form>
@@ -177,7 +180,7 @@
                 </div>
 
                 <br>
-                
+
                 <!-- Gets results -->
                 <button class="button search-btn">Find Parks</button>
             </section>
@@ -189,8 +192,11 @@
     <footer>
         <h4>outdoorsyISH</h4>
         <nav>
-            <li>Welcome</li>
-            <li>Plan Your Adventure</li>
+            <ul>
+                <!-- add nav links here -->
+                <li><a href='#welcome'>Welcome</a></li>
+                <li><a href='#planYourAdventure'>Plan Your Adventure</a></li>
+            </ul>
         </nav>
     </footer>
 
