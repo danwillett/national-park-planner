@@ -5,19 +5,19 @@ function makeFeatures(object) {
 
   // creates map feature objects for each park including information that will be displayed in modals
   for (var i = 0; i < object.data.length; i++) {
-    console.log(i)
+    // console.log(i);
 
     var parkName = object.data[i].fullName;
     var parkImage = object.data[i].images[0].url;
     var parkDescription = object.data[i].description;
     var parkLocation = object.data[i].addresses[0].city + ', ' + object.data[i].addresses[0].stateCode;
-    console.log(parkImage)
+    // console.log(parkImage);
 
-    console.log(parkName)
+    // console.log(parkName);
 
-    console.log(object.data[i])
+    // console.log(object.data[i])
     var latitude = object.data[i].latitude;
-    console.log(latitude)
+    // console.log(latitude)
     var longitude = object.data[i].longitude;
 
     var addFeature = new ol.Feature({
@@ -28,9 +28,9 @@ function makeFeatures(object) {
       image: parkImage,
       url: object.data[i].url,
       description: parkDescription
-      
+
     });
-    parkPins[parkName] = addFeature
+    parkPins[parkName] = addFeature;
   }
 
   // combines map features into a single vector layer that will be added to the map
@@ -49,26 +49,26 @@ function makeFeatures(object) {
       })
     })
   })
-  console.log(pins)
+  // console.log(pins)
   // adds the location pins to the map
   map.addLayer(pins)
-  
-  // generates a new view to zoom in on the parks
-  var ext=addFeature.getGeometry().getExtent();
-  var center=ol.extent.getCenter(ext);
 
-  console.log(center)
-  map.setView( new ol.View({
-    center: [center[0] , center[1]],//zoom to the center of your feature
+  // generates a new view to zoom in on the parks
+  var ext = addFeature.getGeometry().getExtent();
+  var center = ol.extent.getCenter(ext);
+
+  // console.log(center)
+  map.setView(new ol.View({
+    center: [center[0], center[1]],//zoom to the center of your feature
     zoom: 5 //here you define the levelof zoom
   }));
-  
+
   // adds an event listener to the map viewport
   map.getViewport().addEventListener("click", function (e) {
     // when pixels with pins are selected, it will show the selected park's modal preview
     map.forEachFeatureAtPixel(map.getEventPixel(e), function (feature, layer) {
-      console.log(feature)
-      
+      // console.log(feature)
+
       // adds content to empty div element containing modal structure
       var previewEl = document.getElementById('park-preview');
 
@@ -82,15 +82,15 @@ function makeFeatures(object) {
       backgroundImageEl.setAttribute('class', 'park-image')
       backgroundImageEl.style.backgroundImage = 'url(' + feature.values_.image; + ')'
 
-      var parkDescriptionEl =  document.getElementById('park-description');
+      var parkDescriptionEl = document.getElementById('park-description');
       parkDescriptionEl.textContent = feature.values_.description;
-      
+
       var parkWebsiteLinkEl = document.getElementById('park-website');
       var link = feature.values_.url;
       parkWebsiteLinkEl.setAttribute('href', link)
       parkWebsiteLinkEl.setAttribute('target', '_blank')
       parkWebsiteLinkEl.textContent = 'Learn More!'
-      
+
       // call foundation method to open the modal when clicked
       $(previewEl).foundation('open')
     });
@@ -99,7 +99,7 @@ function makeFeatures(object) {
 }
 
 // function adds 
-function addParksToMap(parksObject) { 
+function addParksToMap(parksObject) {
 
   // adds variables to be used in fetch call to nps api
   var parkBaseUrl = 'https://@developer.nps.gov/api/v1'
@@ -107,21 +107,21 @@ function addParksToMap(parksObject) {
 
   var selectedParks = [];
   // creating final list of park codes to be used in fetch call
-  for (var pc = 0; pc < parksObject.length; pc++){    
-  selectedParks.push(parksObject[pc].parkCode);
-  } 
-  console.log(selectedParks)
+  for (var pc = 0; pc < parksObject.length; pc++) {
+    selectedParks.push(parksObject[pc].parkCode);
+  }
+  // console.log(selectedParks)
 
   // gets park information from final list of park codes
   fetch(parkBaseUrl + '/parks?parkCode=' + String(selectedParks) + apiParam)
-  .then(function (response) {
-    return response.json();
+    .then(function (response) {
+      return response.json();
 
-  }).then(function (obj) {
-    console.log(obj.data.length);
-    // with information, adds map features based on park location
-    makeFeatures(obj);
-  })
+    }).then(function (obj) {
+      // console.log(obj.data.length);
+      // with information, adds map features based on park location
+      makeFeatures(obj);
+    })
 }
 
 var map = new ol.Map({
@@ -136,9 +136,9 @@ var map = new ol.Map({
   target: 'map',
 });
 
-var parkList = [ {park:"yosemite", parkCode:"yose", url:"someurl"}, {park:"yosemite", parkCode:"chis", url:"someurl"}, {park:"yosemite", parkCode:"fopo", url:"someurl"}]
+// var parkList = [ {park:"yosemite", parkCode:"yose", url:"someurl"}, {park:"yosemite", parkCode:"chis", url:"someurl"}, {park:"yosemite", parkCode:"fopo", url:"someurl"}]
 
-addParksToMap(parkList)
+// addParksToMap(parkList)
 
 
 

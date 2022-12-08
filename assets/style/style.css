@@ -34,10 +34,10 @@
   }
 
   /*Map*/
-  .map {
-    height: 400px;
+  /* .map {
+    height: 420px;
     width: 100%;
-}
+} */
 
 
   /* nav bar */
@@ -173,7 +173,7 @@
 
   /* map */
 
-  #map {
+  #map-div {
     width: 800px;
     height: 40px;
     object-fit: cover;
@@ -181,9 +181,9 @@
   
   /* main content */
   
-  .main-content {
+  /* .main-content {
     
-  }
+  } */
 /* footer */
 
 .footer {
@@ -192,6 +192,6 @@
     padding: 10px;
   }
 
-  .footer-nav {
+  /* .footer-nav {
 
-}
+} */
