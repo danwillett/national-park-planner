@@ -255,10 +255,11 @@ function displayFinalParkList() {
     console.log(finalParkList);
 
     //display final park list on HTMl page
-    if (pList !== "") {
-        pList.innerHTML = "";
-    }
+    // if (pList !== "") {
+    //     pList.innerHTML = "";
+    // }
 
+    if (pList === "") {
     pList = $('<ul>');
     for (var x = 0; x < finalParkList.length; x++) {
         var item = $('<li>');
@@ -270,7 +271,22 @@ function displayFinalParkList() {
 
         item.append(park);
         pList.append(item);
+    } 
+} else {
+        pList.remove();
+        pList = $('<ul>');
+        for (var x = 0; x < finalParkList.length; x++) {
+            var item = $('<li>');
+            var park = $('<a>');
+    
+            park.attr('href', finalParkList[x].url);
+            park.attr('target', '_blank');
+            park.text(finalParkList[x].park);
+    
+            item.append(park);
+            pList.append(item);
     }
+}
     parkList.append(pList);
 
     //display parks on the lsit on the map
@@ -435,7 +451,6 @@ submitBtn.on('click', function (event) {
 
 // clear clear local storage, refresh page
 clearBtn.click(function (event) {
-
     event.preventDefault();
     localStorage.clear();
     location.reload();
