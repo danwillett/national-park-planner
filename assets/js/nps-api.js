@@ -230,6 +230,7 @@ function getCommonParks() {
     }
 }
 
+
 //Get all parks of the state - used when the user just give the state and do not choose any activity or amenity
 function getAllParksForState(data) {
     var parkEl = {
@@ -249,6 +250,20 @@ function getAllParksForState(data) {
     }
 }
 
+function createFinalParkList() {
+    for (var x = 0; x < finalParkList.length; x++) {
+        var item = $('<li>');
+        var park = $('<a>');
+
+        park.attr('href', finalParkList[x].url);
+        park.attr('target', '_blank');
+        park.text(finalParkList[x].park);
+
+        item.append(park);
+        pList.append(item);
+    }
+}
+
 //create an unordered list to display the final list of parks after selection
 function displayFinalParkList() {
 
@@ -256,32 +271,34 @@ function displayFinalParkList() {
 
     if (pList === "") {
         pList = $('<ul>');
-        for (var x = 0; x < finalParkList.length; x++) {
-            var item = $('<li>');
-            var park = $('<a>');
+        createFinalParkList()
+        // for (var x = 0; x < finalParkList.length; x++) {
+        //     var item = $('<li>');
+        //     var park = $('<a>');
 
-            park.attr('href', finalParkList[x].url);
-            park.attr('target', '_blank');
-            park.text(finalParkList[x].park);
+        //     park.attr('href', finalParkList[x].url);
+        //     park.attr('target', '_blank');
+        //     park.text(finalParkList[x].park);
 
-            item.append(park);
-            pList.append(item);
-        }
+        //     item.append(park);
+        //     pList.append(item);
+        // }
 
     } else {
         pList.remove();
         pList = $('<ul>');
-        for (var x = 0; x < finalParkList.length; x++) {
-            var item = $('<li>');
-            var park = $('<a>');
+        createFinalParkList()
+        // for (var x = 0; x < finalParkList.length; x++) {
+        //     var item = $('<li>');
+        //     var park = $('<a>');
 
-            park.attr('href', finalParkList[x].url);
-            park.attr('target', '_blank');
-            park.text(finalParkList[x].park);
+        //     park.attr('href', finalParkList[x].url);
+        //     park.attr('target', '_blank');
+        //     park.text(finalParkList[x].park);
 
-            item.append(park);
-            pList.append(item);
-        }
+        //     item.append(park);
+        //     pList.append(item);
+        // }
     }
     parkList.append(pList);
 
