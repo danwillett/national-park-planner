@@ -178,7 +178,8 @@ function getParksForChosenAmenity(state, data) {
     for (var i = 0; i < data.data.length; i++) {
 
         var parkEl = {
-            act: "",
+            // act: "", should this be amt? 
+            amt: "",
             park: "",
             parkCode: "",
             url: ""
@@ -229,6 +230,7 @@ function getCommonParks() {
     }
 }
 
+
 //Get all parks of the state - used when the user just give the state and do not choose any activity or amenity
 function getAllParksForState(data) {
     var parkEl = {
@@ -248,17 +250,7 @@ function getAllParksForState(data) {
     }
 }
 
-//create an unordered list to display the final list of parks after selection
-function displayFinalParkList() {
-
-    console.log(finalParkList);
-
-    //display final park list on HTMl page
-    if (pList !== "") {
-        pList.innerHTML = "";
-    }
-
-    pList = $('<ul>');
+function createFinalParkList() {
     for (var x = 0; x < finalParkList.length; x++) {
         var item = $('<li>');
         var park = $('<a>');
@@ -269,6 +261,44 @@ function displayFinalParkList() {
 
         item.append(park);
         pList.append(item);
+    }
+}
+
+//create an unordered list to display the final list of parks after selection
+function displayFinalParkList() {
+
+    console.log(finalParkList);
+
+    if (pList === "") {
+        pList = $('<ul>');
+        createFinalParkList()
+        // for (var x = 0; x < finalParkList.length; x++) {
+        //     var item = $('<li>');
+        //     var park = $('<a>');
+
+        //     park.attr('href', finalParkList[x].url);
+        //     park.attr('target', '_blank');
+        //     park.text(finalParkList[x].park);
+
+        //     item.append(park);
+        //     pList.append(item);
+        // }
+
+    } else {
+        pList.remove();
+        pList = $('<ul>');
+        createFinalParkList()
+        // for (var x = 0; x < finalParkList.length; x++) {
+        //     var item = $('<li>');
+        //     var park = $('<a>');
+
+        //     park.attr('href', finalParkList[x].url);
+        //     park.attr('target', '_blank');
+        //     park.text(finalParkList[x].park);
+
+        //     item.append(park);
+        //     pList.append(item);
+        // }
     }
     parkList.append(pList);
 
@@ -429,12 +459,11 @@ submitBtn.on('click', function (event) {
         amenityList: amenities
     }
     localStorage.setItem("lastSearch", JSON.stringify(searchParams));
-
+    console.log(searchParams);
 });
 
 // clear clear local storage, refresh page
 clearBtn.click(function (event) {
-
     event.preventDefault();
     localStorage.clear();
     location.reload();
@@ -442,7 +471,7 @@ clearBtn.click(function (event) {
 
 function setActivities(activities) {
     let checkboxes = document.querySelectorAll('input[name="activity"]');
-    
+
     checkboxes.forEach((checkbox) => {
         for (var i = 0; i < activities.length; i++) {
             if (checkbox.value == activities[i]) {
@@ -454,10 +483,10 @@ function setActivities(activities) {
 
 function setAmenities(amenities) {
     let checkboxes = document.querySelectorAll('input[name="amenity"]');
-  
+
     checkboxes.forEach((checkbox) => {
         for (var i = 0; i < amenities.length; i++) {
-        
+
             if (checkbox.value == amenities[i]) {
                 checkbox.checked = true;
             }
@@ -480,7 +509,11 @@ function restoreLastSearch(lastSearch) {
     }
 
     //set the state name in display
-    stateEl.value = state;
+    // stateEl.value = state;
+    // console.log(stateEl.value);
+    
+    // populates last searched state in input as placeholder text
+    $('input:text').attr('placeholder', "Last searched: " + state)
 
     setActivities(lastSearch.activityList);
     setAmenities(lastSearch.amenityList)

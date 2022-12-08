@@ -2,3 +2,7 @@ ul li{
     list-style-type: none;
 };
 
+
+.grid-container {
+    width: 50vw;
+}
