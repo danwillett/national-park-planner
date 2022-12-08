@@ -254,39 +254,35 @@ function displayFinalParkList() {
 
     console.log(finalParkList);
 
-    //display final park list on HTMl page
-    // if (pList !== "") {
-    //     pList.innerHTML = "";
-    // }
-
     if (pList === "") {
-    pList = $('<ul>');
-    for (var x = 0; x < finalParkList.length; x++) {
-        var item = $('<li>');
-        var park = $('<a>');
+        pList = $('<ul>');
+        for (var x = 0; x < finalParkList.length; x++) {
+            var item = $('<li>');
+            var park = $('<a>');
 
-        park.attr('href', finalParkList[x].url);
-        park.attr('target', '_blank');
-        park.text(finalParkList[x].park);
+            park.attr('href', finalParkList[x].url);
+            park.attr('target', '_blank');
+            park.text(finalParkList[x].park);
 
-        item.append(park);
-        pList.append(item);
-    } 
-} else {
+            item.append(park);
+            pList.append(item);
+        }
+
+    } else {
         pList.remove();
         pList = $('<ul>');
         for (var x = 0; x < finalParkList.length; x++) {
             var item = $('<li>');
             var park = $('<a>');
-    
+
             park.attr('href', finalParkList[x].url);
             park.attr('target', '_blank');
             park.text(finalParkList[x].park);
-    
+
             item.append(park);
             pList.append(item);
+        }
     }
-}
     parkList.append(pList);
 
     //display parks on the lsit on the map
@@ -458,7 +454,7 @@ clearBtn.click(function (event) {
 
 function setActivities(activities) {
     let checkboxes = document.querySelectorAll('input[name="activity"]');
-    
+
     checkboxes.forEach((checkbox) => {
         for (var i = 0; i < activities.length; i++) {
             if (checkbox.value == activities[i]) {
@@ -470,10 +466,10 @@ function setActivities(activities) {
 
 function setAmenities(amenities) {
     let checkboxes = document.querySelectorAll('input[name="amenity"]');
-  
+
     checkboxes.forEach((checkbox) => {
         for (var i = 0; i < amenities.length; i++) {
-        
+
             if (checkbox.value == amenities[i]) {
                 checkbox.checked = true;
             }
@@ -498,6 +494,7 @@ function restoreLastSearch(lastSearch) {
     //set the state name in display
     // stateEl.value = state;
     // console.log(stateEl.value);
+    
     // populates last searched state in input as placeholder text
     $('input:text').attr('placeholder', "Last searched: " + state)
 
