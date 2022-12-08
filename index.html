@@ -16,12 +16,12 @@
     <!-- openLayers -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="./assets/mapping-parks/map-style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.1.0/dist/ol.js"></script>
     <link rel="stylesheet" href="assets/style/selection-form.css" />
     <link rel="stylesheet" href="assets/style/multi-select-dropdown.css" />
     <link rel="stylesheet" href="./assets/style/style.css" />
-    <link rel="stylesheet" href="./assets/mapping-parks/map-style.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/ol@v7.1.0/dist/ol.js"></script>
     
 </head>
 
@@ -95,7 +95,7 @@
                 <h3>Let us help you decide where to go.</h3>
                 <!-- enter a state: autocomplete -->
                 <form>
-                    <div class="grid-container">
+                    <div class="grid-container MultiCheckBox">
                         <div class="grid-x grid-padding-x">
                             <div class="medium-6 cell ui-widget" id="choose-a-state">
                                 <label for="state-names">Enter the name of a state you would like to visit:

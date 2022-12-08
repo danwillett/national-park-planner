@@ -178,7 +178,8 @@ function getParksForChosenAmenity(state, data) {
     for (var i = 0; i < data.data.length; i++) {
 
         var parkEl = {
-            act: "",
+            // act: "", should this be amt? 
+            amt: "",
             park: "",
             parkCode: "",
             url: ""
@@ -429,7 +430,7 @@ submitBtn.on('click', function (event) {
         amenityList: amenities
     }
     localStorage.setItem("lastSearch", JSON.stringify(searchParams));
-
+    console.log(searchParams);
 });
 
 // clear clear local storage, refresh page
@@ -480,7 +481,9 @@ function restoreLastSearch(lastSearch) {
     }
 
     //set the state name in display
-    stateEl.value = state;
+    // stateEl.value = state;
+    // console.log(stateEl.value);
+    $('input:text').attr('placeholder', "Last searched: " + state)
 
     setActivities(lastSearch.activityList);
     setAmenities(lastSearch.amenityList)
