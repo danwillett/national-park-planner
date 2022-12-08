@@ -483,6 +483,7 @@ function restoreLastSearch(lastSearch) {
     //set the state name in display
     // stateEl.value = state;
     // console.log(stateEl.value);
+    // populates last searched state in input as placeholder text
     $('input:text').attr('placeholder', "Last searched: " + state)
 
     setActivities(lastSearch.activityList);
