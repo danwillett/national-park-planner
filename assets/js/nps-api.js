@@ -1,3 +1,4 @@
+//Developer: Rima Bhumbla
 // import API key 
 import {
     apiKeyNPS,
@@ -47,11 +48,17 @@ function getNPSActivities() {
         .then(function () {
             //populate the activities dropdown on form
             for (var i = 0; i < activitesOffered.length; i++) {
-                var opt = $('<option>');
-
-                opt.attr('value', activitesOffered[i].id);
-                opt.text(activitesOffered[i].name);
-                activityEl.append(opt);
+                var listItem = $('<li>')
+                var checkbox = $('<input>');
+                checkbox.attr('type', "checkbox");
+                checkbox.attr('name', 'activity');
+                checkbox.attr('value', activitesOffered[i].id);
+                var label = $('<label>');
+                label.attr('for', activitesOffered[i].name);
+                label.text(activitesOffered[i].name)
+                listItem.append(checkbox);
+                listItem.append(label);
+                activityEl.append(listItem);
             }
         });
 }
@@ -105,11 +112,26 @@ function getNPSAmenities() {
         .then(function () {
             //populate the activities dropdown on form
             for (var i = 0; i < amenitiesOffered.length; i++) {
-                var opt = $('<option>');
 
-                opt.attr('value', amenitiesOffered[i].id);
-                opt.text(amenitiesOffered[i].name);
-                amenityEl.append(opt);
+                var listItem = $('<li>')
+                var checkbox = $('<input>');
+                checkbox.attr('type', "checkbox");
+                checkbox.attr('name', 'amenity');
+                checkbox.attr('value', amenitiesOffered[i].id);
+                var label = $('<label>');
+                label.attr('for', amenitiesOffered[i].name);
+                label.text(amenitiesOffered[i].name);
+                listItem.append(checkbox);
+                listItem.append(label);
+                amenityEl.append(listItem);
+            }
+        })
+        .then(function () {
+            //restore from local storage
+            var lastSearch = JSON.parse(localStorage.getItem("lastSearch"));
+
+            if (lastSearch !== null) {
+                restoreLastSearch(lastSearch);
             }
         });
 }
@@ -249,6 +271,9 @@ function displayFinalParkList() {
         pList.append(item);
     }
     parkList.append(pList);
+
+    //display parks on the lsit on the map
+    addParksToMap(finalParkList);
 }
 
 //This function will populate finalparkList with list of parks for chosen activites or ameties or both.  
@@ -344,6 +369,33 @@ function findParks(state, activityList, amenityList) {
     }
 }
 
+//Get all checked activities
+function getSelectedActivites() {
+    var activities = [];
+
+    let checkboxes = document.querySelectorAll('input[name="activity"]:checked');
+
+    checkboxes.forEach((checkbox) => {
+        activities.push(checkbox.value);
+    });
+
+    return activities;
+}
+
+//Get all checked amenities
+function getSelectedAmenities() {
+    var amenities = [];
+
+    let checkboxes = document.querySelectorAll('input[name="amenity"]:checked');
+
+    checkboxes.forEach((checkbox) => {
+        amenities.push(checkbox.value);
+    });
+
+    return amenities;
+}
+
+//Event Listener for Find Park button
 submitBtn.on('click', function (event) {
     event.preventDefault();
 
@@ -356,14 +408,17 @@ submitBtn.on('click', function (event) {
 
     finalParkList.length = 0;
 
+    //Convert state name into state code for APIs
     for (var i = 0; i < stateInfo.length; i++) {
         if (state === stateInfo[i].name)
             stateCode = stateInfo[i].code;
     }
 
-    var activities = activityEl.val();
-    var amenities = amenityEl.val();
+    //Get list of checked activities and amenities
+    var activities = getSelectedActivites();
+    var amenities = getSelectedAmenities();
 
+    //Find parks which meet the criteria
     findParks(stateCode, activities, amenities);
 
     //store in local storage the last search
@@ -379,20 +434,45 @@ submitBtn.on('click', function (event) {
 
 // clear clear local storage, refresh page
 clearBtn.click(function (event) {
+
     event.preventDefault();
     localStorage.clear();
     location.reload();
 })
 
+function setActivities(activities) {
+    let checkboxes = document.querySelectorAll('input[name="activity"]');
+    
+    checkboxes.forEach((checkbox) => {
+        for (var i = 0; i < activities.length; i++) {
+            if (checkbox.value == activities[i]) {
+                checkbox.checked = true;
+            }
+        }
+    });
+}
 
+function setAmenities(amenities) {
+    let checkboxes = document.querySelectorAll('input[name="amenity"]');
+  
+    checkboxes.forEach((checkbox) => {
+        for (var i = 0; i < amenities.length; i++) {
+        
+            if (checkbox.value == amenities[i]) {
+                checkbox.checked = true;
+            }
+        }
+    });
+}
+
+//Get last search from the local storage
 function restoreLastSearch(lastSearch) {
     var stateCode = lastSearch.state;
     var activities = lastSearch.activityList.toString();
     var amenities = lastSearch.amenityList.toString();
     var state = "";
 
-
-
+    //Convert store state code to state name
     for (var i = 0; i < stateInfo.length; i++) {
         if (stateInfo[i].code === stateCode) {
             state = stateInfo[i].name;
@@ -400,9 +480,10 @@ function restoreLastSearch(lastSearch) {
     }
 
     //set the state name in display
-    stateEl.text(state);
-    activityEl.val(activities);
-    amenityEl.val(amenities);
+    stateEl.value = state;
+
+    setActivities(lastSearch.activityList);
+    setAmenities(lastSearch.amenityList)
 
     console.log("Restore..." + lastSearch.state + ";" + activities + ";" + amenities);
 
