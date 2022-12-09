@@ -55,161 +55,141 @@
     <main>
         <!-- map -->
         <section>
-            <div class="responsive-embed" id="map-div">
-                <!-- <iframe width="420" height="315" frameborder="0" allowfullscreen> -->
-                <div id="map" class="map"></div>
-                <div class="reveal" id="park-preview" data-reveal>
-                    <h3 id="park-title">HEYYY</h3>
-                    <h5 id="location"></h5>
-                    <section id="park-image"></section>
-                    <p class="lead" id="park-description"></p>
-                    <a id="park-website"></a>
-                    <button class="close-button" data-close aria-label="Close modal" type="button">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            <!-- </iframe> -->
-            </div>
+            
+        <div class="container">  <!-- main container div start -->
 
-        </section>
-
-    <div class="container">   
-        <div class="container-1">
-            <section class="box-1"> 
-                <div class="responsive-embed" id="map">
-                    <iframe width="420" height="315" src="file:///Users/marissathompson/bootcamp/national-park-planner/assets/mapping-parks/map.html" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </section>
-        </div>    
-        <!-- welcome + about us -->
-    <div class="container-2"> 
-        <section class="box-2" id="welcome">
-            <h2 class="main-content">Welcome to outdoorsyISH!</h2>
-            <!-- Feel free to edit my copy, this is just a rough draft and I welcome feedback and suggestions! -->
-            <p class="main-content">outdoorsyISH is <i>the</i> spot to plan your next National Parks adventure. Not a
-                hiker? Can't stand
-                camping? We'll help you find comfortable lodging, tasty restaurants, and plenty of indoor <i>and</i>
-                outdoor activities to suit your needs. So let's get packing!</p>
-        </section>
-
-        <!-- trip planner -->
-        <section class="box-3" id="plan-your-trip" >
-
-            <h2>Plan your adventure(ish)</h2>
-            <p>Enter the name of the state you would like to visit in the form below to get started.</p>
-            <p>Need a little more guidance? Not a problem. Choose some activities and amenities as well and we'll help
-                you find a park to meet your needs.</p>
-        </section>
-
-            <section class="box-4">
-                <h3>Let us help you decide where to go.</h3>
-                <!-- enter a state: autocomplete -->
-                <form>
-                    <div class="grid-container MultiCheckBox">
-                        <div class="grid-x grid-padding-x">
-                            <div class="medium-6 cell ui-widget" id="choose-a-state">
-                                <label for="state-names">Enter the name of a state you would like to visit:
-                                    <input id="state-names" type="text" placeholder="type state name here">
-                                </label>
+            <div class="container-1">
+                <div class="box-1">
+                        <div class="responsive-embed" id="map-div">
+                        <!-- <iframe width="420" height="315" frameborder="0" allowfullscreen> -->
+                            <div id="map" class="map"></div>
+                            <div class="reveal" id="park-preview" data-reveal>
+                                <h3 id="park-title">HEYYY</h3>
+                                <h5 id="location"></h5>
+                                <section id="park-image"></section>
+                                <p class="lead" id="park-description"></p>
+                                <a id="park-website"></a>
+                                <button class="close-button" data-close aria-label="Close modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </section>
+                </div>            
+                <!-- </iframe> -->
 
-                <!-- Select activities -->
-            <div class="box-5">    
-                <Section>
-                <h3>Select activities:</h3>
-                <button class="button" type="button" data-toggle="example-dropdown-right-top"
-                    id="selectActivities">Activities</button>
-                <div class="dropdown-pane" data-position="right" data-alignment="top" id="example-dropdown-right-top"
-                    data-dropdown data-auto-focus="true">
-                    <form>
-                        <label for="activities">
-                            <div>
-                                <fieldset class="large-7 cell" id="input">
-                                    <legend>Activity 1</legend>
-                                    <!-- add flex to ul -->
-                                    <ul class="grid-x" id="activity1">
-                                        <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox
-                                                1</label>
-                                        </li>
-                                        <li><input id="checkbox2" type="checkbox"><label for="checkbox1">Checkbox
-                                                2</label>
-                                        </li>
-                                        <li><input id="checkbox3" type="checkbox"><label for="checkbox1">Checkbox
-                                                3</label>
-                                        </li>
-                                    </ul>
-                                </fieldset>
-                            </div>
-                            <div>
-                                <fieldset class="large-7 cell" id="input">
-                                    <legend>Activity 2</legend>
-                                    <ul class="grid-x activity2">
-                                        <li><input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox
-                                                1</label>
-                                        </li>
-                                        <li><input id="checkbox2" type="checkbox"><label for="checkbox1">Checkbox
-                                                2</label>
-                                        </li>
-                                        <li><input id="checkbox3" type="checkbox"><label for="checkbox1">Checkbox
-                                                3</label>
-                                        </li>
-                                    </ul>
-                                </fieldset>
-                            </div>
-                        </label>
-                    </form>
-                </div>
-                </section>
-
-                <br>
-
-                <!-- Select amenitites -->
-                <button class="button" type="button" data-toggle="amenities" id="selectAmenities">Amenities</button>
-                <div class="dropdown-pane" data-position="right" data-alignment="top" id="amenities" data-dropdown
-                    data-auto-focus="true">
-                    <form>
-                        <label for="amenities">
-                            <fieldset class="large-7 cell">
-                                <legend>Choose one or more amenities:</legend>
-                                <ul class="grid-x" id="amenity-select">
-                                </ul>
-                            </fieldset>
-                        </label>
-                    </form>
-                </div>
+        </section>
+        <div class="container-2">
+            <!-- welcome + about us -->
+            <div class="box-2">
+                <section class="main-content" id="welcome">
+                    <h2 class="main-content">Welcome to outdoorsyISH!</h2>
+                    <!-- Feel free to edit my copy, this is just a rough draft and I welcome feedback and suggestions! -->
+                    <p class="main-content">outdoorsyISH is <i>the</i> spot to plan your next National Parks adventure. Not a
+                        hiker? Can't stand
+                        camping? We'll help you find comfortable lodging, tasty restaurants, and plenty of indoor <i>and</i>
+                        outdoor activities to suit your needs. So let's get packing!</p>
                 </section>
             </div>
-        </div> 
-   </div>              
-                <br>
+            <!-- trip planner -->
+        <div class="box-3">
+            <section class="main-content" id="plan-your-trip">
 
-                <!-- Gets results -->
-      <div class="box-6">          
-        <button class="button" id="submit">Find Parks</button>
+                <h2>Plan your adventure(ish)</h2>
+                <p>Enter the name of the state you would like to visit in the form below to get started.</p>
+                <p>Need a little more guidance? Not a problem. Choose some activities and amenities as well and we'll help
+                    you find a park to meet your needs.</p>
+            </section>
+         </div>
+
+         <div class="box-4">   
+            <section class="main-content">
+                <h3>Let us help you decide where to go.</h3>
+                    <!-- enter a state: autocomplete -->
+                    <form>
+                        <div class="grid-container MultiCheckBox">
+                            <div class="grid-x grid-padding-x">
+                                <div class="medium-6 cell ui-widget" id="choose-a-state">
+                                    <label for="state-names">Enter the name of a state you would like to visit:
+                                        <input id="state-names" type="text" placeholder="type state name here">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+            </section>
+        </div>    
+                    <!-- Select activities -->
+        <div class="box-5">            
+                    <Section>
+                        <h3 class="main-content">Select activities:</h3>
+                        <button class="button" type="button" data-toggle="activities"
+                            id="selectActivities">Activities</button>
+                        <div class="dropdown-pane" data-position="right" data-alignment="top" id="activities" data-dropdown
+                            data-auto-focus="true">
+                            <form>
+                                <label for="activities">
+                                    <div>
+                                        <fieldset class="large-7 cell">
+                                            <legend>Choose one or more activities:</legend>
+                                            <!-- add flex to ul -->
+                                            <ul class="grid-x" id="activity-select">
+                                            </ul>
+                                        </fieldset>
+                                    </div>
+                                </label>
+                            </form>
+                        </div>
+                    </section>
+
+                    <br>
+
+                    <!-- Select amenitites -->
+                <button class="button" type="button" data-toggle="amenities" id="selectAmenities">Amenities</button>
+                    <div class="dropdown-pane" data-position="right" data-alignment="top" id="amenities" data-dropdown
+                        data-auto-focus="true">
+                        <form>
+                            <label for="amenities">
+                                <fieldset class="large-7 cell">
+                                    <legend>Choose one or more amenities:</legend>
+                                    <ul class="grid-x" id="amenity-select">
+                                    </ul>
+                                </fieldset>
+                            </label>
+                        </form>
+                    </div>
+        </div>
+
+    </div>
+            <br>
+        
+            <!-- Gets results -->
+        <section class="box-6">   
+            <button class="button" id="submit">Find Parks</button>
             <div id="park-list">
                 <p>List of parks:</p>
             </div>
-      </div>     
         </section>
-       </div>
-     
+            </div>
+        
     </main>
     
-    <!-- footer -->
-      
-    <footer class="box-7">
-        <div class="footer-content">
-            <h4>outdoorsyISH</h4>
-                <nav>
-                    <li>Plan Your Adventure</li>
-                </nav>
-        </div>        
-    </footer>
+    <br>
+        <div class="box-7">
+            <button id="clear" class="button">Clear</button>
+        </div>    
+    <br>
 
+ <!-- footer -->
+    <div class="box-8">
+        <footer>
+            <h4>outdoorsyISH</h4>
+            <nav>
+                <li>Welcome</li>
+                <li>Plan Your Adventure</li>
+            </nav>
+        </footer>
+    </div>
+    
     <!-- script links -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/js/foundation.min.js" crossorigin="anonymous"></script>

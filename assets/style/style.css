@@ -1,6 +1,7 @@
 .container {
   display: flex;
   justify-content: flex-start;
+  border: 15px #ccc solid;
 }
 
 /* map container */ 
@@ -9,6 +10,7 @@
   align-items: flex-start;
   padding-left: 2%;
   padding-top: 2%;
+  border: 15px #ccc solid;
 }
 
 /* main content */
@@ -19,44 +21,60 @@
   align-items: flex-end;
   padding-right: 5%;
   padding-top: 2%;
+  border: 10px #ccc solid;
+  
 }
 
+/* map */
 .box-1 {
   border: 1px #ccc solid;
   padding: 10px;
 }
 
+/*  welcome about u */
 .box-2 {
   border: 1px #ccc solid;
   padding: 10px;
-  width: 90%;
+  width: 45%;
 }
 
+/* plan adventure */
 .box-3 {
   border: 1px #ccc solid;
   padding: 10px;
-  width: 90%;
+  width: 45%;
 }
 
+/* let us help decided */
 .box-4 {
   border: 1px #ccc solid;
   padding: 10px;
-  width: 90%;
+  width: 45%;
 }
 
+/* select activities/amenities */
 .box-5 {
   border: 1px #ccc solid;
   padding: 10px;
-  width: 90%;
+  width: 45%;
 }
+
 /* find parks button */
 .box-6 {
   border: 1px #ccc solid;
   padding: 10px;
   padding-left: 40px;
 }
-/* footer box */
+
+/* clear button */
 .box-7 {
+  border: 1px #ccc solid;
+  padding: 10px;
+  padding-left: 40px;
+}
+
+/* footer box */
+.box-8 {
   border: 1px #ccc solid;
   padding: 10px;
   padding-bottom: 20px;
@@ -234,12 +252,7 @@
     object-fit: cover;
   }
 
-   /* Map
-   .map {
-    height: 400px;
-    width: 100%;
-  }
-  */
+
   
   /* footer */
   footer {
