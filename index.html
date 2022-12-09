@@ -70,43 +70,35 @@
         </div>
         <!-- map -->
         <div class="container">
-            <section>
-
-
-                <div class="container-1">
-                    <div class="box-1">
-                        <div class="responsive-embed" id="map-div">
-                            <!-- <iframe width="420" height="315" frameborder="0" allowfullscreen> -->
-                            <div id="map" class="map"></div>
-                            <div class="reveal" id="park-preview" data-reveal>
-                                <h3 id="park-title">HEYYY</h3>
-                                <h5 id="location"></h5>
-                                <section id="park-image"></section>
-                                <p class="lead" id="park-description"></p>
-                                <a id="park-website"></a>
-                                <button class="close-button" data-close aria-label="Close modal" type="button">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div id="park-list">
-                            <p>List of parks:</p>
-                            <br>
-                            <div class>
-                                <button id="clear" class="button">Clear</button>
-                            </div>
-                            <br>
+            <div class="container-1">
+                <div class="box-1">
+                    <div class="responsive-embed" id="map-div">
+                        <div id="map" class="map"></div>
+                        <div class="reveal" id="park-preview" data-reveal>
+                            <h3 id="park-title">HEYYY</h3>
+                            <h5 id="location"></h5>
+                            <section id="park-image"></section>
+                            <p class="lead" id="park-description"></p>
+                            <a id="park-website"></a>
+                            <button class="close-button" data-close aria-label="Close modal" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     </div>
-                    <!-- </iframe> -->
+                    <div id="park-list">
+                        <p>List of parks:</p>
+                    </div>
+                    <div class>
+                        <button id="clear" class="button">Clear</button>
+                    </div>
+                </div>
+            </div>
 
-            </section>
             <div class="container-2">
 
                 <!-- trip planner -->
                 <div class="box-3">
                     <section class="main-content" id="plan-your-trip">
-
                         <h2>Plan your adventure(ish)</h2>
                         <p>Enter the name of the state you would like to visit in the form below to get started.</p>
                         <p>Need a little more guidance? Not a problem. Choose some activities and amenities as well and
@@ -119,25 +111,28 @@
                     <section class="main-content">
                         <h3>Let us help you decide where to go.</h3>
                         <!-- enter a state: autocomplete -->
+                        <div>
                         <form>
                             <div class="grid-container MultiCheckBox">
-                                <div class="grid-x grid-padding-x">
+                                <div class="grid-x grid-padding-x required-field" >
                                     <div class="medium-6 cell ui-widget" id="choose-a-state">
                                         <!-- <label for="state-names">Enter the name of a state you would like to visit:
                                             <input id="state-names" type="text" placeholder="type state name here">
                                         </label> -->
                                         <label for="state-names">Select state(s) you would like to visit:</label>
                                         <select id="state-names" multiple></select>
-                                        <p id="reqd-error"></p>
+                                        <p class="required-field" id="reqd-error"></p>
                                     </div>
                                 </div>
                             </div>
                         </form>
+                    </div>
                     </section>
                 </div>
+                
                 <!-- Select activities -->
                 <div id="box-5">
-                    <Section>
+                    <section>
                         <h3 class="main-content">Select activities:</h3>
                         <button class="button" type="button" data-toggle="activities"
                             id="selectActivities">Activities</button>
@@ -157,7 +152,6 @@
                             </form>
                         </div>
                     </section>
-
 
                     <!-- Select amenitites -->
                     <button class="button" type="button" data-toggle="amenities" id="selectAmenities">Amenities</button>
@@ -179,15 +173,9 @@
 
 
                 </div>
-                <br>
-
-                <!-- Gets results -->
-
             </div>
 
     </main>
-
-
 
     <!-- footer -->
     <div class="footer-content box-8">
@@ -212,6 +200,7 @@
 
     <!-- Our scripts -->
     <script src="./assets/mapping-parks/map.js"></script>
+    <!-- <script src="./assets/js/multi-select-dropdown.js"></script> -->
     <script src="./assets/js/nps-api.js" type="module"></script>
 
 </body>
