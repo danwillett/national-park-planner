@@ -299,14 +299,11 @@ function displayFinalParkList() {
 
     if (pList === "") {
         pList = $('<ul>');
-        createFinalParkList()
-
-
+        createFinalParkList();
     } else {
         pList.remove();
         pList = $('<ul>');
-        createFinalParkList()
-
+        createFinalParkList();
     }
     parkList.append(pList);
 
@@ -522,8 +519,7 @@ function restoreLastSearch(lastSearch) {
     // console.log(stateEl.value);
 
     // populates last searched state in input as placeholder text
-    //$('input:text').attr('placeholder', "Last searched: " + state)
-    stateEl.attr('placeholder', "Last searched: " + state);
+    $('input:text').attr('placeholder', "Last searched: " + state)
 
     setActivities(lastSearch.activityList);
     setAmenities(lastSearch.amenityList)
