@@ -2,19 +2,22 @@
 // import API key 
 import {
     apiKeyNPS,
-    stateInfo
+    stateInfo,
+    amenitiesOffered
 } from './config.js';
 
 //Global variables
 var pList = "";
 var activitesOffered = []; //activities offered by NPS
 var parksForChosenActivity = []; //parks where a user can find their chosen activity
-var amenitiesOffered = []; //amenities offered by NPS
+//var amenitiesOffered = []; //amenities offered by NPS
 var amenityCategories = []; //type of amenities
 var parksForChosenAmenity = []; //parks where a user can find their chosen amenity
 var finalParkList = []; //parks for a state with chosen sctivities and 
 
 var stateEl = $('#state-names');
+// added variable for required alert
+var requiredAlert = $('#reqd-error');
 var activityEl = $('#activity-select');
 var amenityEl = $('#amenity-select');
 var submitBtn = $('#submit');
@@ -67,73 +70,30 @@ function getNPSActivities() {
 
 //get amenities list along with its id and category
 function getNPSAmenities() {
-    var requestURL = "https://developer.nps.gov/api/v1/amenities?limit=130&api_key=" + apiKeyNPS;
-    console.log(requestURL);
+    //populate the activities dropdown on form
+    for (var i = 0; i < amenitiesOffered.length; i++) {
 
-    fetch(requestURL)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
+        var listItem = $('<li>')
+        var checkbox = $('<input>');
+        checkbox.attr('type', "checkbox");
+        checkbox.attr('name', 'amenity');
+        checkbox.attr('value', amenitiesOffered[i].id);
+        var label = $('<label>');
+        label.attr('for', amenitiesOffered[i].name);
+        label.text(amenitiesOffered[i].name);
+        listItem.append(checkbox);
+        listItem.append(label);
+        amenityEl.append(listItem);
+    }
 
-            var amenity = {
-                id: "",
-                name: "",
-                category: ""
-            }
 
-            for (var i = 0; i < data.data.length; i++) {
+    //restore from local storage
+    var lastSearch = JSON.parse(localStorage.getItem("lastSearch"));
 
-                //add amenity for each category it belong to for easier display later
+    if (lastSearch !== null) {
+        restoreLastSearch(lastSearch);
+    }
 
-                for (var j = 0; j < data.data[i].categories.length; j++) {
-
-                    amenity = {
-                        id: data.data[i].id,
-                        name: data.data[i].name,
-                        category: data.data[i].categories[j]
-                    }
-                    amenitiesOffered[i] = amenity;
-
-                    //if category doesnot exist in amenityCategories array then add it
-                    var exist = false;
-
-                    for (var k = 0; k < amenityCategories.length; k++) {
-                        if (amenityCategories[k] === data.data[i].categories[j])
-                            exist = true;
-                    }
-
-                    if (exist === false)
-                        amenityCategories[amenityCategories.length] = data.data[i].categories[j];
-                }
-
-            }
-        })
-        .then(function () {
-            //populate the activities dropdown on form
-            for (var i = 0; i < amenitiesOffered.length; i++) {
-
-                var listItem = $('<li>')
-                var checkbox = $('<input>');
-                checkbox.attr('type', "checkbox");
-                checkbox.attr('name', 'amenity');
-                checkbox.attr('value', amenitiesOffered[i].id);
-                var label = $('<label>');
-                label.attr('for', amenitiesOffered[i].name);
-                label.text(amenitiesOffered[i].name);
-                listItem.append(checkbox);
-                listItem.append(label);
-                amenityEl.append(listItem);
-            }
-        })
-        .then(function () {
-            //restore from local storage
-            var lastSearch = JSON.parse(localStorage.getItem("lastSearch"));
-
-            if (lastSearch !== null) {
-                restoreLastSearch(lastSearch);
-            }
-        });
 }
 
 function getAmenitiesForCategory(category) {
@@ -149,6 +109,7 @@ function getAmenitiesForCategory(category) {
 
 //Get parks from data returned from API for activities
 function getParksForChosenActivity(state, data) {
+    console.log("activity..." + state);
     for (var i = 0; i < data.data.length; i++) {
         var parkEl = {
             act: "",
@@ -156,8 +117,11 @@ function getParksForChosenActivity(state, data) {
             parkCode: "",
             url: ""
         }
+
         for (var x = 0; x < data.data[i].parks.length; x++) {
-            if (data.data[i].parks[x].states.match(state)) {
+           // if (data.data[i].parks[x].states.match(state)) {
+            var pState = data.data[i].parks[x].states;
+            if (state.toString().match(pState)) {
                 parkEl = {
                     act: data.data[i].name,
                     park: data.data[i].parks[x].fullName,
@@ -175,6 +139,7 @@ function getParksForChosenActivity(state, data) {
 
 //Get parks from data returned from API for amenities
 function getParksForChosenAmenity(state, data) {
+
     for (var i = 0; i < data.data.length; i++) {
 
         var parkEl = {
@@ -185,7 +150,9 @@ function getParksForChosenAmenity(state, data) {
             url: ""
         }
         for (var x = 0; x < data.data[i][0].parks.length; x++) {
-            if (data.data[i][0].parks[x].states.match(state)) {
+          //  if (data.data[i][0].parks[x].states.match(state)) {
+            var pState = data.data[i][0].parks[x].states;
+            if (state.toString().match(pState)) {
                 parkEl = {
                     amt: data.data[i][0].name,
                     park: data.data[i][0].parks[x].fullName,
@@ -238,7 +205,7 @@ function getAllParksForState(data) {
         parkCode: "",
         url: ""
     }
-
+    
     for (var i = 0; i < data.data.length; i++) {
 
         parkEl = {
@@ -271,34 +238,11 @@ function displayFinalParkList() {
 
     if (pList === "") {
         pList = $('<ul>');
-        createFinalParkList()
-        // for (var x = 0; x < finalParkList.length; x++) {
-        //     var item = $('<li>');
-        //     var park = $('<a>');
-
-        //     park.attr('href', finalParkList[x].url);
-        //     park.attr('target', '_blank');
-        //     park.text(finalParkList[x].park);
-
-        //     item.append(park);
-        //     pList.append(item);
-        // }
-
+        createFinalParkList();
     } else {
         pList.remove();
         pList = $('<ul>');
-        createFinalParkList()
-        // for (var x = 0; x < finalParkList.length; x++) {
-        //     var item = $('<li>');
-        //     var park = $('<a>');
-
-        //     park.attr('href', finalParkList[x].url);
-        //     park.attr('target', '_blank');
-        //     park.text(finalParkList[x].park);
-
-        //     item.append(park);
-        //     pList.append(item);
-        // }
+        createFinalParkList();
     }
     parkList.append(pList);
 
@@ -427,11 +371,13 @@ function getSelectedAmenities() {
 
 //Event Listener for Find Park button
 submitBtn.on('click', function (event) {
+    console.log(requiredAlert.text());
     event.preventDefault();
-
     var state = stateEl.val();
+    console.log("state = " + state);
     if (state == "") {
         console.log("State is a required field.  Please enter a valid state.");
+        requiredAlert.text("You must select at least one state to complete search!")
         return;
     }
     var stateCode = "";
@@ -439,23 +385,25 @@ submitBtn.on('click', function (event) {
     finalParkList.length = 0;
 
     //Convert state name into state code for APIs
-    for (var i = 0; i < stateInfo.length; i++) {
-        if (state === stateInfo[i].name)
-            stateCode = stateInfo[i].code;
-    }
+    // for (var i = 0; i < stateInfo.length; i++) {
+    //     if (state === stateInfo[i].name)
+    //         stateCode = stateInfo[i].code;
+    // }
 
     //Get list of checked activities and amenities
     var activities = getSelectedActivites();
     var amenities = getSelectedAmenities();
 
     //Find parks which meet the criteria
-    findParks(stateCode, activities, amenities);
+    // findParks(stateCode, activities, amenities);
+    findParks(state, activities, amenities);
 
     //store in local storage the last search
     // localStorage.clear();
     localStorage.removeItem("lastSearch")
     var searchParams = {
-        state: stateCode,
+        //state: stateCode,
+        state: state,
         activityList: activities,
         amenityList: amenities
     }
@@ -504,18 +452,19 @@ function restoreLastSearch(lastSearch) {
     var state = "";
 
     //Convert store state code to state name
-    for (var i = 0; i < stateInfo.length; i++) {
-        if (stateInfo[i].code === stateCode) {
-            state = stateInfo[i].name;
-        }
-    }
+    // for (var i = 0; i < stateInfo.length; i++) {
+    //     if (stateInfo[i].code === stateCode) {
+    //         state = stateInfo[i].name;
+    //     }
+    // }
 
     //set the state name in display
-    // stateEl.value = state;
-    // console.log(stateEl.value);
-    
+     stateEl.value = state;
+     stateEl.val(state);
+     console.log(stateEl.value);
+
     // populates last searched state in input as placeholder text
-    $('input:text').attr('placeholder', "Last searched: " + state)
+  //  $('input:text').attr('placeholder', "Last searched: " + state)
 
     setActivities(lastSearch.activityList);
     setAmenities(lastSearch.amenityList)
@@ -525,8 +474,20 @@ function restoreLastSearch(lastSearch) {
     findParks(lastSearch.state, activities, amenities);
 }
 
+function getStates(){
+    for (var i = 0; i < stateInfo.length; i++) {
+        var opt = $('<option>');
+
+        opt.attr('value', stateInfo[i].code);
+        opt.text(stateInfo[i].name);
+        stateEl.append(opt);
+    }
+}
 
 function init() {
+    //populate states in he multiselect
+    getStates();
+
     //populate all activities provided by NPS
     getNPSActivities();
 
