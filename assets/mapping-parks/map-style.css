@@ -14,8 +14,20 @@
 .park-image {
     width:100%;
     height: 70%;
-    /* background-image: url("../images/beach-1.jpg"); */
     background-size: cover;
     background-position: center;
     margin-bottom: 1%;
+}
+
+#saved-parks {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.savedImages{
+    width: 100%;
+    object-fit:cover;
+
 }

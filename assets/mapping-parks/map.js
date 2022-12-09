@@ -1,5 +1,81 @@
 // this function adds pin points for the filtered park locations to the map
 // this function adds pin points for the filtered park locations to the map
+
+if (localStorage.getItem("savedParks") === null) {
+  var savedParks = {};
+} else {
+  var savedParks = JSON.parse(localStorage.getItem("savedParks"));
+  loadSavedSearches(savedParks)
+}
+
+
+console.log(document.getElementById("hey"))
+function loadSavedSearches(parksToLoad){
+
+  var savedParksEl = document.getElementById('saved-parks');
+  var savedKeys = Object.keys(parksToLoad)
+  console.log(savedParksEl)
+
+  for (var i = 0; i < savedKeys.length; i++){
+
+    var parkDetails = parksToLoad[savedKeys[i]]
+    if (document.getElementById(parkDetails.name)===null) {
+      var parkTitle = parkDetails.name;
+    var cardEl = $('<div>')
+    $(cardEl).attr("class", "card");
+    $(cardEl).css("width", "300px");
+    $(cardEl).attr("id", parkDetails.name)
+    
+
+    var titleEl = $('<div>')
+    $(titleEl).attr("class", "card-divider")
+    $(titleEl).text(parkTitle)
+    $(cardEl).append(titleEl)
+
+    console.log(parksToLoad.image)
+
+    var imgEl = $('<img>');
+      $(imgEl).attr("src", parkDetails.image)
+      $(imgEl).attr("class", "savedImages");
+
+    $(cardEl).append(imgEl)
+
+    var infoEl = $('<div>')
+    $(infoEl).attr("class", "card-section")
+
+    var locEl = $('<h4>')
+    $(locEl).text(parkDetails.location)
+    $(infoEl).append(locEl)
+
+    var pEl = $('<p>')
+    $(pEl).text(parkDetails.description)
+    $(infoEl).append(pEl)
+    $(cardEl).append(infoEl)
+    
+    var linkEl = $('<a>');
+    linkEl.text("Check it out!")
+    linkEl.attr("href", parkDetails.url)
+    linkEl.attr("target", "_blank")
+    $(cardEl).append(linkEl)
+
+    var removeButton = $('<button>')
+    $(removeButton).text("Remove Park")
+    console.log(removeButton)
+    $(cardEl).append(removeButton)
+
+    var addPinButton = $('<button>')
+    $(addPinButton).text("See on map")
+    console.log(addPinButton)
+    $(cardEl).append(addPinButton)
+
+    $(savedParksEl).append(cardEl)
+    } else {
+      console.log("park already saved")
+    }
+    
+  }
+}
+
 function makeFeatures(object) {
   console.log(object.data.length)
   var parkPins = {};
@@ -15,6 +91,7 @@ function makeFeatures(object) {
     var parkImage = object.data[i].images[0].url;
     var parkDescription = object.data[i].description;
     var parkLocation = object.data[i].addresses[0].city + ', ' + object.data[i].addresses[0].stateCode;
+    var parkCode = object.data[i].parkCode;
     console.log(parkImage)
 
     console.log(parkName)
@@ -27,7 +104,7 @@ function makeFeatures(object) {
     var addFeature = new ol.Feature({
       geometry: new ol.geom.Point(ol.proj.fromLonLat([longitude, latitude])),
       name: parkName,
-      // code: parkCode,
+      code: parkCode,
       location: parkLocation,
       image: parkImage,
       url: object.data[i].url,
@@ -48,8 +125,6 @@ function makeFeatures(object) {
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
-        // src: './assets/mapping-parks/images/map-icon.png',
-        src: './images/map-icon.png',
         // src: './assets/mapping-parks/images/map-icon.png',
         src: './images/map-icon.png',
         scale: 0.03
@@ -101,6 +176,41 @@ function makeFeatures(object) {
       
       // call foundation method to open the modal when clicked
       $(previewEl).foundation('open')
+
+        // set park into local storage
+        var saveButton = document.getElementById('save-button')
+        saveButton.addEventListener('click', function(event){
+          
+            event.preventDefault();
+            event.stopPropagation();
+
+            console.log(localStorage.getItem("savedParks"))
+            
+            var code = feature.values_.code;
+            console.log(code)
+            thisPark = feature.values_;
+            // {
+            //   name: feature.values_.name,
+            //   code: feature.values_.code,
+            //   description
+            //   location: feature.values_.location,
+            //   image: feature.values_.image,
+            //   url: feature.values_.url
+            // }
+            console.log(thisPark)
+            console.log(savedParks)
+            savedParks[feature.values_.name] = thisPark
+                     
+            localStorage.setItem("savedParks", JSON.stringify(savedParks))
+            savedParks = JSON.parse(localStorage.getItem("savedParks"));
+            console.log(savedParks)
+      
+            loadSavedSearches(savedParks);
+        }, {once: true})
+        
+        
+      
+
     });
   });
 

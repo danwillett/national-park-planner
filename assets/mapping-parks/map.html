@@ -26,7 +26,7 @@
   <h2>My Map</h2>
   <div id="map" class="map"></div>
   <div class="reveal" id="park-preview" data-reveal>
-    <h3 id="park-title">HEYYY</h3>
+    <h3 id="park-title"></h3>
     <h5 id="location"></h5>
     <section id="park-image"></section>
     <p class="lead" id="park-description"></p>
@@ -34,13 +34,24 @@
     <button class="close-button" data-close aria-label="Close modal" type="button">
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>
+    <button id="save-button" aria-label="save park" type="button">
+      <span aria-hidden="true">Save Park</span>
+    </button>
 
-  <script src="./map.js"></script>
+  </div>
+  <section>
+    <h2>Saved Parks</h2>
+    <section id="saved-parks"></section>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="foundation-js/vendor/jquery.js"></script>
   <script src="foundation-js/vendor/what-input.js"></script>
   <script src="foundation-js/vendor/foundation.js"></script>
   <script src="foundation-js/app.js"></script>
+  <script src="./map.js"></script>
+
+
 </body>
 
 </html>
