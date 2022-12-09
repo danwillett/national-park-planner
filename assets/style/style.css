@@ -111,6 +111,11 @@
   }
 
   /* nav bar */
+  .nav {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+  }
   
 .topbar-responsive {
     background: #2c3840;
