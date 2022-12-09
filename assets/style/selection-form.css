@@ -4,9 +4,10 @@ ul li{
 
 
 .grid-container {
-    width: 50vw;
+    width: 80vw;
 }
 
-#required {
+/* .required-field {
+    font-style: italic;
     color: red;
-}
+} */
