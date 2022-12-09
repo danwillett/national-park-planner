@@ -2,14 +2,15 @@
 // import API key 
 import {
     apiKeyNPS,
-    stateInfo
+    stateInfo,
+    amenitiesOffered
 } from './config.js';
 
 //Global variables
 var pList = "";
 var activitesOffered = []; //activities offered by NPS
 var parksForChosenActivity = []; //parks where a user can find their chosen activity
-var amenitiesOffered = []; //amenities offered by NPS
+//var amenitiesOffered = []; //amenities offered by NPS
 var amenityCategories = []; //type of amenities
 var parksForChosenAmenity = []; //parks where a user can find their chosen amenity
 var finalParkList = []; //parks for a state with chosen sctivities and 
@@ -67,74 +68,101 @@ function getNPSActivities() {
 
 //get amenities list along with its id and category
 function getNPSAmenities() {
-    var requestURL = "https://developer.nps.gov/api/v1/amenities?limit=130&api_key=" + apiKeyNPS;
-    console.log(requestURL);
+    //populate the activities dropdown on form
+    for (var i = 0; i < amenitiesOffered.length; i++) {
 
-    fetch(requestURL)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
+        var listItem = $('<li>')
+        var checkbox = $('<input>');
+        checkbox.attr('type', "checkbox");
+        checkbox.attr('name', 'amenity');
+        checkbox.attr('value', amenitiesOffered[i].id);
+        var label = $('<label>');
+        label.attr('for', amenitiesOffered[i].name);
+        label.text(amenitiesOffered[i].name);
+        listItem.append(checkbox);
+        listItem.append(label);
+        amenityEl.append(listItem);
+    }
 
-            var amenity = {
-                id: "",
-                name: "",
-                category: ""
-            }
 
-            for (var i = 0; i < data.data.length; i++) {
+    //restore from local storage
+    var lastSearch = JSON.parse(localStorage.getItem("lastSearch"));
 
-                //add amenity for each category it belong to for easier display later
+    if (lastSearch !== null) {
+        restoreLastSearch(lastSearch);
+    }
 
-                for (var j = 0; j < data.data[i].categories.length; j++) {
-
-                    amenity = {
-                        id: data.data[i].id,
-                        name: data.data[i].name,
-                        category: data.data[i].categories[j]
-                    }
-                    amenitiesOffered[i] = amenity;
-
-                    //if category doesnot exist in amenityCategories array then add it
-                    var exist = false;
-
-                    for (var k = 0; k < amenityCategories.length; k++) {
-                        if (amenityCategories[k] === data.data[i].categories[j])
-                            exist = true;
-                    }
-
-                    if (exist === false)
-                        amenityCategories[amenityCategories.length] = data.data[i].categories[j];
-                }
-
-            }
-        })
-        .then(function () {
-            //populate the activities dropdown on form
-            for (var i = 0; i < amenitiesOffered.length; i++) {
-
-                var listItem = $('<li>')
-                var checkbox = $('<input>');
-                checkbox.attr('type', "checkbox");
-                checkbox.attr('name', 'amenity');
-                checkbox.attr('value', amenitiesOffered[i].id);
-                var label = $('<label>');
-                label.attr('for', amenitiesOffered[i].name);
-                label.text(amenitiesOffered[i].name);
-                listItem.append(checkbox);
-                listItem.append(label);
-                amenityEl.append(listItem);
-            }
-        })
-        .then(function () {
-            //restore from local storage
-            var lastSearch = JSON.parse(localStorage.getItem("lastSearch"));
-
-            if (lastSearch !== null) {
-                restoreLastSearch(lastSearch);
-            }
-        });
 }
+
+// function getNPSAmenities() {
+//     var requestURL = "https://developer.nps.gov/api/v1/amenities?limit=130&api_key=" + apiKeyNPS;
+//     console.log(requestURL);
+
+//     fetch(requestURL)
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (data) {
+
+//             var amenity = {
+//                 id: "",
+//                 name: "",
+//                 category: ""
+//             }
+
+//             for (var i = 0; i < data.data.length; i++) {
+
+//                 //add amenity for each category it belong to for easier display later
+
+//                 for (var j = 0; j < data.data[i].categories.length; j++) {
+
+//                     amenity = {
+//                         id: data.data[i].id,
+//                         name: data.data[i].name,
+//                         category: data.data[i].categories[j]
+//                     }
+//                     amenitiesOffered[i] = amenity;
+
+//                     //if category doesnot exist in amenityCategories array then add it
+//                     var exist = false;
+
+//                     for (var k = 0; k < amenityCategories.length; k++) {
+//                         if (amenityCategories[k] === data.data[i].categories[j])
+//                             exist = true;
+//                     }
+
+//                     if (exist === false)
+//                         amenityCategories[amenityCategories.length] = data.data[i].categories[j];
+//                 }
+
+//             }
+//         })
+//         .then(function () {
+//             //populate the activities dropdown on form
+//             for (var i = 0; i < amenitiesOffered.length; i++) {
+
+//                 var listItem = $('<li>')
+//                 var checkbox = $('<input>');
+//                 checkbox.attr('type', "checkbox");
+//                 checkbox.attr('name', 'amenity');
+//                 checkbox.attr('value', amenitiesOffered[i].id);
+//                 var label = $('<label>');
+//                 label.attr('for', amenitiesOffered[i].name);
+//                 label.text(amenitiesOffered[i].name);
+//                 listItem.append(checkbox);
+//                 listItem.append(label);
+//                 amenityEl.append(listItem);
+//             }
+//         })
+//         .then(function () {
+//             //restore from local storage
+//             var lastSearch = JSON.parse(localStorage.getItem("lastSearch"));
+
+//             if (lastSearch !== null) {
+//                 restoreLastSearch(lastSearch);
+//             }
+//         });
+// }
 
 function getAmenitiesForCategory(category) {
     var amenities = [];
@@ -487,10 +515,11 @@ function restoreLastSearch(lastSearch) {
 
     //set the state name in display
     // stateEl.value = state;
+    // stateEl.val(state);
     // console.log(stateEl.value);
-    
+
     // populates last searched state in input as placeholder text
-    $('input:text').text('placeholder', "Last searched: " + state)
+    $('input:text').attr('placeholder', "Last searched: " + state)
 
     setActivities(lastSearch.activityList);
     setAmenities(lastSearch.amenityList)
