@@ -96,7 +96,6 @@ function loadSavedSearches(parksToLoad) {
     event.preventDefault();
     event.stopPropagation();
 
-    console.log($(this).parent())
     var cardContainer = $(this).parent().parent().parent()
     var parentName = cardContainer.attr("id")
     $(cardContainer).remove()
@@ -111,6 +110,8 @@ function loadSavedSearches(parksToLoad) {
     event.preventDefault();
     event.stopPropagation();
     console.log("hey")
+    var cardContainer = $(this).parent().parent().parent()
+    var parentName = cardContainer.attr("id")
   })
 
 }
@@ -167,8 +168,8 @@ function makeFeatures(object) {
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
-        // src: './assets/mapping-parks/images/map-icon.png',
-        src: './images/map-icon.png',
+        src: './assets/mapping-parks/images/map-icon.png',
+        // src: './images/map-icon.png',
         scale: 0.03
       })
     })
