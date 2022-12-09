@@ -271,34 +271,11 @@ function displayFinalParkList() {
 
     if (pList === "") {
         pList = $('<ul>');
-        createFinalParkList()
-        // for (var x = 0; x < finalParkList.length; x++) {
-        //     var item = $('<li>');
-        //     var park = $('<a>');
-
-        //     park.attr('href', finalParkList[x].url);
-        //     park.attr('target', '_blank');
-        //     park.text(finalParkList[x].park);
-
-        //     item.append(park);
-        //     pList.append(item);
-        // }
-
+        createFinalParkList();
     } else {
         pList.remove();
         pList = $('<ul>');
-        createFinalParkList()
-        // for (var x = 0; x < finalParkList.length; x++) {
-        //     var item = $('<li>');
-        //     var park = $('<a>');
-
-        //     park.attr('href', finalParkList[x].url);
-        //     park.attr('target', '_blank');
-        //     park.text(finalParkList[x].park);
-
-        //     item.append(park);
-        //     pList.append(item);
-        // }
+        createFinalParkList();
     }
     parkList.append(pList);
 
@@ -513,7 +490,7 @@ function restoreLastSearch(lastSearch) {
     // console.log(stateEl.value);
     
     // populates last searched state in input as placeholder text
-    $('input:text').attr('placeholder', "Last searched: " + state)
+    $('input:text').text('placeholder', "Last searched: " + state)
 
     setActivities(lastSearch.activityList);
     setAmenities(lastSearch.amenityList)
