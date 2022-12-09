@@ -54,7 +54,7 @@ function getNPSActivities() {
                 var listItem = $('<li>')
                 var checkbox = $('<input>');
                 checkbox.attr('type', "checkbox");
-                checkbox.attr('name', 'activityNPS');
+                checkbox.attr('name', 'activity');
                 checkbox.attr('value', activitesOffered[i].id);
                 var label = $('<label>');
                 label.attr('for', activitesOffered[i].name);
@@ -237,9 +237,11 @@ function displayFinalParkList() {
     console.log(finalParkList);
 
     if (pList === "") {
+       
         pList = $('<ul>');
         createFinalParkList();
     } else {
+       
         pList.remove();
         pList = $('<ul>');
         createFinalParkList();
@@ -419,11 +421,12 @@ clearBtn.click(function (event) {
 
 function setActivities(activities) {
     
-    console.log(activities);
+    console.log("setactivities");
     let checkboxes = document.querySelectorAll('input[name="activity"]');
-
+    console.log(checkboxes);
     checkboxes.forEach((checkbox) => {
         for (var i = 0; i < activities.length; i++) {
+            console.log(activities[i]);
             console.log(checkbox.value);
             if (checkbox.value == activities[i]) {
                 checkbox.checked = true;
@@ -433,8 +436,9 @@ function setActivities(activities) {
 }
 
 function setAmenities(amenities) {
+    console.log("setamenities");
     let checkboxes = document.querySelectorAll('input[name="amenity"]');
-
+    console.log(checkboxes);
     checkboxes.forEach((checkbox) => {
         for (var i = 0; i < amenities.length; i++) {
 
@@ -484,7 +488,7 @@ function getStates(){
 }
 
 function init() {
-    //populate states in he multiselect
+    //populate states in the multiselect
     getStates();
 
     //populate all activities provided by NPS
