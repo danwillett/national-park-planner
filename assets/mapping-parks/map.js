@@ -24,6 +24,8 @@ function loadSavedSearches(parksToLoad) {
       $(cardEl).attr("class", "card");
       $(cardEl).css("width", "300px");
       $(cardEl).attr("id", parkDetails.name)
+      $(cardEl).attr("data-code", parkDetails.code)
+      
 
       var headEl = $('<div>')
       $(headEl).attr("class", "card-divider")
@@ -64,31 +66,27 @@ function loadSavedSearches(parksToLoad) {
       $(infoEl).append(pEl)
 
       var navEl = $('<nav>')
-      $(navEl).css({ "display": "flex", "flex-direction": "row", "flex-wrap": "wrap", "justify-content": "space-between" })
+      $(navEl).css({ "display": "flex", "flex-direction": "row", "flex-wrap": "wrap", "justify-content": "space-between", "align-items":"center" })
 
       var linkEl = $('<a>');
       linkEl.text("Check it out!")
       linkEl.attr("href", parkDetails.url)
       linkEl.attr("target", "_blank")
-      linkEl.attr("class", "button")
 
       $(navEl).append(linkEl)
 
       var removeButton = $('<button>')
       $(removeButton).text("Remove")
-      $(removeButton).attr("class", "alert button remove-button")
+      $(removeButton).attr("class", "alert button")
+      $(removeButton).attr("id", "remove-button")
 
       $(navEl).append(removeButton)
-
       $(infoEl).append(navEl)
-
       $(cardEl).append(infoEl)
-
       $(savedParksEl).append(cardEl)
     } else {
       console.log("park already saved")
     }
-
   }
 
   // when remove button is clicked, the saved park display will be removed and deleted from local storage
@@ -111,11 +109,13 @@ function loadSavedSearches(parksToLoad) {
     event.stopPropagation();
     console.log("hey")
     var cardContainer = $(this).parent().parent().parent()
-    var parentName = cardContainer.attr("id")
+    var savedParkCode = {parkCode:cardContainer.attr("data-code")};
+    console.log(savedParkCode)
+    addParksToMap(savedParkCode)
+
   })
 
 }
-
 
 
 // this function adds pin points for the filtered park locations to the map
@@ -204,9 +204,12 @@ function makeFeatures(object) {
       var locationEl = document.getElementById('location');
       locationEl.textContent = feature.values_.location;
 
-      var backgroundImageEl = document.getElementById('park-image');
-      backgroundImageEl.setAttribute('class', 'park-image')
-      backgroundImageEl.style.backgroundImage = 'url(' + feature.values_.image; + ')'
+      
+      
+
+      var backgroundImageEl = $('#park-image');
+      $(backgroundImageEl).attr("class", "savedImages");
+      $(backgroundImageEl).attr("src", feature.values_.image)
 
       var parkDescriptionEl = document.getElementById('park-description');
       parkDescriptionEl.textContent = feature.values_.description;
@@ -215,7 +218,7 @@ function makeFeatures(object) {
       var link = feature.values_.url;
       parkWebsiteLinkEl.setAttribute('href', link)
       parkWebsiteLinkEl.setAttribute('target', '_blank')
-      parkWebsiteLinkEl.textContent = 'Learn More!'
+      parkWebsiteLinkEl.textContent = 'Check it out!'
 
       // call foundation method to open the modal when clicked
       $(previewEl).foundation('open')
@@ -250,16 +253,21 @@ function makeFeatures(object) {
 
 // function adds 
 function addParksToMap(parksObject) {
-
+  console.log(parksObject)
   // adds variables to be used in fetch call to nps api
   var parkBaseUrl = 'https://@developer.nps.gov/api/v1'
   var apiParam = '&api_key=CrgafHnw6fYelIdITc4yR0KkwUU5rHWRnGKyi8xj';
 
   var selectedParks = [];
   // creating final list of park codes to be used in fetch call
-  for (var pc = 0; pc < parksObject.length; pc++) {
-    selectedParks.push(parksObject[pc].parkCode);
+  if (parksObject.length > 1 ){
+    for (var pc = 0; pc < parksObject.length; pc++) {
+      selectedParks.push(parksObject[pc].parkCode);
+    }
+  } else {
+    selectedParks = parksObject.parkCode
   }
+  
   console.log(selectedParks)
 
   // gets park information from final list of park codes
@@ -286,9 +294,13 @@ var map = new ol.Map({
   target: 'map',
 });
 
-var parkList = [{ park: "yosemite", parkCode: "yose", url: "someurl" }, { park: "yosemite", parkCode: "chis", url: "someurl" }, { park: "yosemite", parkCode: "fopo", url: "someurl" }]
+// var parkList = [{ park: "yosemite", parkCode: "yose", url: "someurl" }]
 
-addParksToMap(parkList)
+// addParksToMap(parkList)
+
+// var parkList = [{ park: "yosemite", parkCode: "yose", url: "someurl" }, { park: "yosemite", parkCode: "chis", url: "someurl" }, { park: "yosemite", parkCode: "fopo", url: "someurl" }]
+
+// addParksToMap(parkList)
 
 
 

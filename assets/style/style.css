@@ -243,8 +243,8 @@
   /* map */
 
   #map-div {
-    width: 800px;
-    height: 730px;
+    width: 700px;
+    height: auto;
     object-fit: cover;
   }
 

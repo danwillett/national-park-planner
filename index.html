@@ -75,22 +75,34 @@
 
                 <div class="container-1">
                     <div class="box-1">
-                        <div class="responsive-embed" id="map-div">
+                        <!-- <div class="responsive-embed" id="map-div"> -->
+                        <div id="map-div">
                             <!-- <iframe width="420" height="315" frameborder="0" allowfullscreen> -->
                             <div id="map" class="map"></div>
-                            <div class="reveal" id="park-preview" data-reveal>
-                                <h3 id="park-title">HEYYY</h3>
-                                <h5 id="location"></h5>
-                                <section id="park-image"></section>
-                                <p class="lead" id="park-description"></p>
+                        
+                        </div>
+                        <div class="reveal" id="park-preview" data-reveal data-append-to="main">
+                            <h3 id="park-title"></h3>
+                            <h5 id="location"></h5>
+                            <img id="park-image"></img>
+                            <p class="lead" id="park-description"></p>
+                            <button class="close-button" data-close aria-label="Close modal" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <nav id="modal-buttons">
                                 <a id="park-website"></a>
-                                <button class="close-button" data-close aria-label="Close modal" type="button">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+                                <button id="save-button" class="submit success button" aria-label="save park" type="button">
+                                    <span aria-hidden="true">Save Park</span>
+                                  </button>
+                            </nav>
+                            
                         </div>
                         <section>
-                            <h2>Saved Parks</h2>
+                            <header id="saved-parks-header">
+                                <h2>Saved Parks</h2>
+                                <button id="remove-all-button"class="alert button">Clear All</button>
+                            </header>
+                            
                             <section id="saved-parks"></section>
                           </section>
                           

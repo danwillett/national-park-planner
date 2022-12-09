@@ -31,3 +31,28 @@
     object-fit:cover;
 
 }
+
+#modal-buttons{
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+#save-button, #remove-button #remove-all-button{
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+#saved-parks-header{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+#saved-parks-header h2, #remove-all-button{
+    margin:3px;
+}
