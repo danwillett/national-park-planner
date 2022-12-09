@@ -43,8 +43,8 @@ function makeFeatures(object) {
         anchor: [0.5, 1],
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
-        // src: './assets/mapping-parks/images/map-icon.png',
-        src: './images/map-icon.png',
+        src: './assets/mapping-parks/images/map-icon.png',
+        //src: './images/map-icon.png',
         scale: 0.03
       })
     })
@@ -101,6 +101,10 @@ function makeFeatures(object) {
 // function adds 
 function addParksToMap(parksObject) {
 
+  console.log("in addParkstoMap");
+
+  console.log(parksObject);
+
   // adds variables to be used in fetch call to nps api
   var parkBaseUrl = 'https://@developer.nps.gov/api/v1'
   var apiParam = '&api_key=CrgafHnw6fYelIdITc4yR0KkwUU5rHWRnGKyi8xj';
@@ -108,7 +112,7 @@ function addParksToMap(parksObject) {
   var selectedParks = [];
   // creating final list of park codes to be used in fetch call
   for (var pc = 0; pc < parksObject.length; pc++) {
-    selectedParks.push(parksObject[pc].parkCode);
+    selectedParks.push(parksObject[pc].code);
   }
   // console.log(selectedParks)
 
