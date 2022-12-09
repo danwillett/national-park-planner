@@ -16,6 +16,8 @@ var parksForChosenAmenity = []; //parks where a user can find their chosen ameni
 var finalParkList = []; //parks for a state with chosen sctivities and 
 
 var stateEl = $('#state-names');
+// added variable for required alert
+var requiredAlert = $('#reqd-error');
 var activityEl = $('#activity-select');
 var amenityEl = $('#amenity-select');
 var submitBtn = $('#submit');
@@ -203,7 +205,7 @@ function getAllParksForState(data) {
         parkCode: "",
         url: ""
     }
-
+    
     for (var i = 0; i < data.data.length; i++) {
 
         parkEl = {
@@ -369,12 +371,12 @@ function getSelectedAmenities() {
 
 //Event Listener for Find Park button
 submitBtn.on('click', function (event) {
+    console.log(requiredAlert.text());
     event.preventDefault();
     var state = stateEl.val();
     console.log("state = " + state);
     if (state == "") {
         console.log("State is a required field.  Please enter a valid state.");
-    var requiredAlert = $('#reqd-error');
         requiredAlert.text("You must select at least one state to complete search!")
         return;
     }
