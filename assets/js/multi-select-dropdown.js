@@ -16,3 +16,20 @@ listItem.append(label);
 console.log(listItem.text());
 activity1.append(listItem)
 
+$('.main-content').addClass("callout alert");
+$('#state-names').append($('<p class="required" id="state-name-required">You must enter a state name.</p>'));
+
+<div class="callout alert">
+<form>
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class="medium-6 cell ui-widget" id="choose-a-state">
+          <label for="state-names">Enter a state name below:
+            <input id="state-names" type="text" placeholder=".medium-6.cell">
+              <p class="required " id="state-name-required">You must enter a state name.</p>
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
