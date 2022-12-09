@@ -16,21 +16,7 @@ listItem.append(label);
 console.log(listItem.text());
 activity1.append(listItem)
 
-$('.required-field').addClass("callout alert");
-$('#state-names').placeholder("You must enter a state name to search");
-// $('#state-names').css('color', 'red')
-
-/* <div class="callout alert">
-<form>
-    <div class="grid-container">
-      <div class="grid-x grid-padding-x">
-        <div class="medium-6 cell ui-widget" id="choose-a-state">
-          <label for="state-names">Enter a state name below:
-            <input id="state-names" type="text" placeholder=".medium-6.cell">
-              <p class="required " id="state-name-required">You must enter a state name above to search.</p>
-          </label>
-        </div>
-      </div>
-    </div>
-  </form>
-</div> */
+var required = $('.required-field');
+required.addClass("callout alert");
+var requiredAlert = $('#required');
+requiredAlert.text("You must select at least one state to search!")

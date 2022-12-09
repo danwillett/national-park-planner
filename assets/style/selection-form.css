@@ -6,3 +6,7 @@ ul li{
 .grid-container {
     width: 50vw;
 }
+
+#required {
+    color: red;
+}
