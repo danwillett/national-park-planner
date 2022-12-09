@@ -18,7 +18,7 @@ activity1.append(listItem)
 
 $('.required-field').addClass("callout alert");
 $('#state-names').placeholder("You must enter a state name to search");
-$('#state-names').css('color', 'red')
+// $('#state-names').css('color', 'red')
 
 /* <div class="callout alert">
 <form>
