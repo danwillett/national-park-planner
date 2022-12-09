@@ -52,7 +52,7 @@ function getNPSActivities() {
                 var listItem = $('<li>')
                 var checkbox = $('<input>');
                 checkbox.attr('type', "checkbox");
-                checkbox.attr('name', 'activity');
+                checkbox.attr('name', 'activityNPS');
                 checkbox.attr('value', activitesOffered[i].id);
                 var label = $('<label>');
                 label.attr('for', activitesOffered[i].name);
@@ -415,10 +415,13 @@ clearBtn.click(function (event) {
 })
 
 function setActivities(activities) {
+    
+    console.log(activities);
     let checkboxes = document.querySelectorAll('input[name="activity"]');
 
     checkboxes.forEach((checkbox) => {
         for (var i = 0; i < activities.length; i++) {
+            console.log(checkbox.value);
             if (checkbox.value == activities[i]) {
                 checkbox.checked = true;
             }
@@ -444,7 +447,7 @@ function restoreLastSearch(lastSearch) {
     var stateCode = lastSearch.state;
     var activities = lastSearch.activityList.toString();
     var amenities = lastSearch.amenityList.toString();
-    var state = "";
+    //var state = "";
 
     //Convert store state code to state name
     // for (var i = 0; i < stateInfo.length; i++) {
@@ -454,10 +457,8 @@ function restoreLastSearch(lastSearch) {
     // }
 
     //set the state name in display
-     stateEl.value = state;
-     stateEl.val(state);
-     console.log(stateEl.value);
-
+     stateEl.val(stateCode);
+     
     // populates last searched state in input as placeholder text
   //  $('input:text').attr('placeholder', "Last searched: " + state)
 
