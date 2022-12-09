@@ -111,20 +111,22 @@
                     <section class="main-content">
                         <h3>Let us help you decide where to go.</h3>
                         <!-- enter a state: autocomplete -->
+                        <div>
                         <form>
                             <div class="grid-container MultiCheckBox">
-                                <div class="grid-x grid-padding-x">
+                                <div class="grid-x grid-padding-x required-field" >
                                     <div class="medium-6 cell ui-widget" id="choose-a-state">
                                         <!-- <label for="state-names">Enter the name of a state you would like to visit:
                                             <input id="state-names" type="text" placeholder="type state name here">
                                         </label> -->
                                         <label for="state-names">Select state(s) you would like to visit:</label>
                                         <select id="state-names" multiple></select>
-                                        <p id="reqd-error"></p>
+                                        <p class="required-field" id="reqd-error"></p>
                                     </div>
                                 </div>
                             </div>
                         </form>
+                    </div>
                     </section>
                 </div>
                 
@@ -198,6 +200,7 @@
 
     <!-- Our scripts -->
     <script src="./assets/mapping-parks/map.js"></script>
+    <!-- <script src="./assets/js/multi-select-dropdown.js"></script> -->
     <script src="./assets/js/nps-api.js" type="module"></script>
 
 </body>

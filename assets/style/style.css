@@ -28,6 +28,11 @@
   padding: 10px;
 }
 
+.required-field {
+  font-style: italic;
+  color: red;
+}
+
 /*  welcome about u */
 .box-2 {
   padding: 10px;
