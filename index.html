@@ -30,7 +30,7 @@
         <!-- working title and tagline, feel free to make suggestions -->
         <div class="hero-section-text">
             <h1>outdoorsyISH</h1>
-            <h3>Your indoorsy guide to the Great Outdoors</h3>
+            <h3>The armchair adventurer's guide to the great outdoors.</h3>
         </div>
 
     </header>
@@ -59,12 +59,12 @@
                 <h2 class="main-content">Welcome to outdoorsyISH!</h2>
                 <!-- Feel free to edit my copy, this is just a rough draft and I welcome feedback and suggestions! -->
                 <p class="main-content">outdoorsyISH is <i>the</i> spot to plan your next National Parks
-                    adventure.
-                    Not a
+                    adventure - or just learn more about what the National Parks have to offer!
+                <p>Not a
                     hiker? Can't stand
-                    camping? We'll help you find comfortable lodging, tasty restaurants, and plenty of indoor
+                    camping? We can help you find comfortable lodging, tasty restaurants, and plenty of indoor
                     <i>and</i>
-                    outdoor activities to suit your needs. So let's get packing!
+                    outdoor activities to suit your needs, all from the comfort of your couch (or armchair).
                 </p>
             </section>
         </div>
@@ -109,43 +109,44 @@
 
                 <div class="box-4">
                     <section class="main-content">
-                        <h3>Let us help you decide where to go.</h3>
+                        <h3>Pick a state, any state.</h3>
                         <!-- enter a state: autocomplete -->
                         <div>
-                        <form>
-                            <div class="grid-container MultiCheckBox">
-                                <div class="grid-x grid-padding-x required-field" >
-                                    <div class="medium-6 cell ui-widget" id="choose-a-state">
-                                        <!-- <label for="state-names">Enter the name of a state you would like to visit:
+                            <form>
+                                <div class="grid-container MultiCheckBox">
+                                    <div class="grid-x grid-padding-x required-field">
+                                        <div class="medium-6 cell ui-widget" id="choose-a-state">
+                                            <!-- <label for="state-names">Enter the name of a state you would like to visit:
                                             <input id="state-names" type="text" placeholder="type state name here">
                                         </label> -->
-                                        <label for="state-names">Select state(s) you would like to visit:</label>
-                                        <select id="state-names" multiple></select>
-                                        <p class="required-field" id="reqd-error"></p>
+                                            <label for="state-names">Select state(s) you would like to visit:</label>
+                                            <select id="state-names" multiple></select>
+                                            <p class="required-field" id="reqd-error"></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                            </form>
+                        </div>
                     </section>
                 </div>
-                
+
                 <!-- Select activities -->
                 <div id="box-5">
                     <section>
-                        <h3 class="main-content">Select activities:</h3>
-                        <button class="button" type="button" data-toggle="activities" id="selectActivities">Activities</button>
+                        <h4 class="main-content">Pick some activities to enjoy:</h3>
+                        <button class="button" type="button" data-toggle="activities"
+                            id="selectActivities">Activities</button>
                         <div class="dropdown-pane" data-position="right" data-alignment="top" id="activities"
                             data-dropdown data-hover="true" data-hover-pane="true">
                             <form>
                                 <label for="activities">
                                     <!-- <div> -->
-                                        <fieldset class="large-7 cell">
-                                            <legend>Choose one or more activities:</legend>
-                                            <!-- add flex to ul -->
-                                            <ul class="grid-x" id="activity-select">
-                                            </ul>
-                                        </fieldset>
+                                    <fieldset class="large-7 cell">
+                                        <legend>Choose as many as you would like:</legend>
+                                        <!-- add flex to ul -->
+                                        <ul class="grid-x" id="activity-select">
+                                        </ul>
+                                    </fieldset>
                                     <!-- </div> -->
                                 </label>
                             </form>
@@ -153,19 +154,23 @@
                     </section>
 
                     <!-- Select amenitites -->
-                    <button class="button" type="button" data-toggle="amenities" id="selectAmenities">Amenities</button>
-                    <div class="dropdown-pane" data-position="right" data-alignment="top" id="amenities" data-dropdown
-                        data-hover="true" data-hover-pane="true">
-                        <form>
-                            <label for="amenities">
-                                <fieldset class="large-7 cell">
-                                    <legend>Choose one or more amenities:</legend>
-                                    <ul class="grid-x" id="amenity-select">
-                                    </ul>
-                                </fieldset>
-                            </label>
-                        </form>
-                    </div>
+                    <section>
+                        <h4 class="main-content">Select your must-have amenities:</h3>
+                        <button class="button" type="button" data-toggle="amenities"
+                            id="selectAmenities">Amenities</button>
+                        <div class="dropdown-pane" data-position="right" data-alignment="top" id="amenities"
+                            data-dropdown data-hover="true" data-hover-pane="true">
+                            <form>
+                                <label for="amenities">
+                                    <fieldset class="large-7 cell">
+                                        <legend>Choose all that apply:</legend>
+                                        <ul class="grid-x" id="amenity-select">
+                                        </ul>
+                                    </fieldset>
+                                </label>
+                            </form>
+                        </div>
+                    </section>
                     <section>
                         <button class="button" id="submit">Find Parks</button>
                     </section>

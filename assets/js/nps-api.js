@@ -381,8 +381,9 @@ function getNPSAmenities() {
         console.log("state = " + state);
         if (state == "") {
             console.log("State is a required field.  Please enter a valid state.");
-            requiredAlert.text("You must select at least one state to complete search!")
-            return;
+            requiredAlert.text("You must select at least one state to complete search!");
+        } else {
+            requiredAlert.text("");
         }
         var stateCode = "";
 
