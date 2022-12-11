@@ -237,9 +237,11 @@ function displayFinalParkList() {
     console.log(finalParkList);
 
     if (pList === "") {
+       
         pList = $('<ul>');
         createFinalParkList();
     } else {
+       
         pList.remove();
         pList = $('<ul>');
         createFinalParkList();
@@ -418,10 +420,14 @@ clearBtn.click(function (event) {
 })
 
 function setActivities(activities) {
+    
+    console.log("setactivities");
     let checkboxes = document.querySelectorAll('input[name="activity"]');
-
+    console.log(checkboxes);
     checkboxes.forEach((checkbox) => {
         for (var i = 0; i < activities.length; i++) {
+            console.log(activities[i]);
+            console.log(checkbox.value);
             if (checkbox.value == activities[i]) {
                 checkbox.checked = true;
             }
@@ -430,8 +436,9 @@ function setActivities(activities) {
 }
 
 function setAmenities(amenities) {
+    console.log("setamenities");
     let checkboxes = document.querySelectorAll('input[name="amenity"]');
-
+    console.log(checkboxes);
     checkboxes.forEach((checkbox) => {
         for (var i = 0; i < amenities.length; i++) {
 
@@ -447,7 +454,7 @@ function restoreLastSearch(lastSearch) {
     var stateCode = lastSearch.state;
     var activities = lastSearch.activityList.toString();
     var amenities = lastSearch.amenityList.toString();
-    var state = "";
+    //var state = "";
 
     //Convert store state code to state name
     // for (var i = 0; i < stateInfo.length; i++) {
@@ -457,10 +464,8 @@ function restoreLastSearch(lastSearch) {
     // }
 
     //set the state name in display
-     stateEl.value = state;
-     stateEl.val(state);
-     console.log(stateEl.value);
-
+     stateEl.val(stateCode);
+     
     // populates last searched state in input as placeholder text
   //  $('input:text').attr('placeholder', "Last searched: " + state)
 
@@ -483,7 +488,7 @@ function getStates(){
 }
 
 function init() {
-    //populate states in he multiselect
+    //populate states in the multiselect
     getStates();
 
     //populate all activities provided by NPS
