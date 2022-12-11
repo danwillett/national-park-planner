@@ -14,8 +14,45 @@
 .park-image {
     width:100%;
     height: 70%;
-    /* background-image: url("../images/beach-1.jpg"); */
     background-size: cover;
     background-position: center;
     margin-bottom: 1%;
+}
+
+#saved-parks {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.savedImages{
+    width: 100%;
+    object-fit:cover;
+
+}
+
+#modal-buttons{
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+#save-button, #remove-button #remove-all-button{
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+#saved-parks-header{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+#saved-parks-header h2, #remove-all-button{
+    margin:3px;
 }

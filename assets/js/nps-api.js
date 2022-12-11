@@ -401,7 +401,8 @@ submitBtn.on('click', function (event) {
     findParks(state, activities, amenities);
 
     //store in local storage the last search
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.removeItem("lastSearch")
     var searchParams = {
         //state: stateCode,
         state: state,
@@ -415,7 +416,8 @@ submitBtn.on('click', function (event) {
 // clear clear local storage, refresh page
 clearBtn.click(function (event) {
     event.preventDefault();
-    localStorage.clear();
+    localStorage.removeItem("lastSearch")
+    // localStorage.clear();
     location.reload();
 })
 
