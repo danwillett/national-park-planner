@@ -384,6 +384,48 @@ function getNPSAmenities() {
             requiredAlert.text("You must select at least one state to complete search!");
         } else {
             requiredAlert.text("");
+
+    //Get list of checked activities and amenities
+    var activities = getSelectedActivites();
+    var amenities = getSelectedAmenities();
+
+    //Find parks which meet the criteria
+    // findParks(stateCode, activities, amenities);
+    findParks(state, activities, amenities);
+
+    //store in local storage the last search
+    // localStorage.clear();
+    localStorage.removeItem("lastSearch")
+    var searchParams = {
+        //state: stateCode,
+        state: state,
+        activityList: activities,
+        amenityList: amenities
+    }
+    localStorage.setItem("lastSearch", JSON.stringify(searchParams));
+    console.log(searchParams);
+});
+
+// clear clear local storage, refresh page
+clearBtn.click(function (event) {
+    event.preventDefault();
+    localStorage.removeItem("lastSearch")
+    // localStorage.clear();
+    location.reload();
+})
+
+function setActivities(activities) {
+    
+    console.log("setactivities");
+    let checkboxes = document.querySelectorAll('input[name="activity"]');
+    console.log(checkboxes);
+    checkboxes.forEach((checkbox) => {
+        for (var i = 0; i < activities.length; i++) {
+            console.log(activities[i]);
+            console.log(checkbox.value);
+            if (checkbox.value == activities[i]) {
+                checkbox.checked = true;
+            }
         }
         var stateCode = "";
 
