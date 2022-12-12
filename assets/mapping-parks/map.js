@@ -250,6 +250,7 @@ function makeFeatures(object) {
         console.log(savedParks)
 
         loadSavedSearches(savedParks);
+        $(previewEl).foundation('close')
       }, { once: true })
     });
   });
