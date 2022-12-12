@@ -45,15 +45,11 @@ a {
 }
 
 #park-list ul {
-    column-count: 3;
+    /* column-count: 3; */
     margin-left: 0;
 }
 
-@media screen and (min-width:800) {
-    #park-list ul {
-        column-count: 2;
-    }
-}
+
 
 .footer-content {
     display: flex;
