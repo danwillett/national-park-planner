@@ -77,8 +77,7 @@ function loadSavedSearches(parksToLoad) {
 
       var removeButton = $('<button>')
       $(removeButton).text("Remove")
-      $(removeButton).attr("class", "alert button")
-      $(removeButton).attr("id", "remove-button")
+      $(removeButton).attr("class", "alert button remove-button")
 
       $(navEl).append(removeButton)
       $(infoEl).append(navEl)
@@ -109,13 +108,23 @@ function loadSavedSearches(parksToLoad) {
     event.stopPropagation();
     console.log("hey")
     var cardContainer = $(this).parent().parent().parent()
-    var savedParkCode = {parkCode:cardContainer.attr("data-code")};
+    var savedParkCode = [{parkCode:cardContainer.attr("data-code")}];
     console.log(savedParkCode)
     addParksToMap(savedParkCode)
 
   })
 
+  $('#remove-all-button').on('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    localStorage.removeItem("savedParks");
+    savedParks = {};
+    $('.card').remove();
+
+  })
+
 }
+
 
 
 // this function adds pin points for the filtered park locations to the map
@@ -191,7 +200,6 @@ function makeFeatures(object) {
   // adds an event listener to the map viewport
   map.getViewport().addEventListener("click", function (e) {
     // when pixels with pins are selected, it will show the selected park's modal preview
-    // when pixels with pins are selected, it will show the selected park's modal preview
     map.forEachFeatureAtPixel(map.getEventPixel(e), function (feature, layer) {
       console.log(feature)
 
@@ -203,9 +211,6 @@ function makeFeatures(object) {
 
       var locationEl = document.getElementById('location');
       locationEl.textContent = feature.values_.location;
-
-      
-      
 
       var backgroundImageEl = $('#park-image');
       $(backgroundImageEl).attr("class", "savedImages");
@@ -253,7 +258,8 @@ function makeFeatures(object) {
 
 // function adds 
 function addParksToMap(parksObject) {
-
+  console.log(parksObject)
+  console.log(parksObject.length)
   // adds variables to be used in fetch call to nps api
   var parkBaseUrl = 'https://@developer.nps.gov/api/v1'
   var apiParam = '&api_key=CrgafHnw6fYelIdITc4yR0KkwUU5rHWRnGKyi8xj';
@@ -261,14 +267,9 @@ function addParksToMap(parksObject) {
   var selectedParks = [];
   // creating final list of park codes to be used in fetch call
 
-  if (parksObject.length > 0 ){
     for (var pc = 0; pc < parksObject.length; pc++) {
       selectedParks.push(parksObject[pc].parkCode);
     }
-  } else {
-    selectedParks = parksObject.parkCode
-
-  }
   
   console.log(selectedParks)
 
