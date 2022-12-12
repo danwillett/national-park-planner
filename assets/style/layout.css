@@ -1,0 +1,60 @@
+:root {
+    --nav-teal: #2c3840;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: rgb(246, 238, 228);
+}
+
+ul li {
+    list-style-type: none;
+}
+
+;
+
+a {
+    color: #fff;
+}
+
+.hero-section-text h3 {
+    color: #fefefe;
+}
+
+.add-padding {
+    padding: 1.5rem;
+}
+
+/* welcome & about us */
+#welcome {
+    text-align: center;
+    font-size: 125%;
+    padding: 3rem;
+}
+
+#map-div {
+    width: 100%;
+    height: auto;
+    padding-bottom: 0px;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer-content h4 {
+    font-size: 2.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    line-height: 3rem;
+    color: #fff;
+
+}
