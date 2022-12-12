@@ -22,6 +22,7 @@ function loadSavedSearches(parksToLoad) {
 
       var cardEl = $('<div>')
       $(cardEl).attr("class", "card");
+
       $(cardEl).css("width", "300px");
       $(cardEl).attr("id", parkDetails.name)
       $(cardEl).attr("data-code", parkDetails.code)
@@ -111,6 +112,7 @@ function loadSavedSearches(parksToLoad) {
     var savedParkCode = [{ parkCode: cardContainer.attr("data-code") }];
     console.log(savedParkCode)
     addParksToMap(savedParkCode)
+    
 
   })
 
@@ -360,15 +362,10 @@ var pins = new ol.layer.Vector({
       console.log(savedParks)
 
       loadSavedSearches(savedParks);
+      $(previewEl).foundation('close')
     }, { once: true })
   })
 };
-
-
-    
-    
-  
-
 
 // function adds 
 function addParksToMap(parksObject) {
