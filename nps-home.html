@@ -16,10 +16,10 @@
     <!-- openLayers -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="./assets/mapping-parks/map-style.css">
     <script src="https://cdn.jsdelivr.net/npm/ol@v7.1.0/dist/ol.js"></script>
     <!-- custom stylesheets -->
-    <link rel="stylesheet" href="./assets/style/multi-select-dropdown.css" />
+    <!-- <link rel="stylesheet" href="./assets/style/multi-select-dropdown.css" /> -->
+    <link rel="stylesheet" href="./assets/mapping-parks/map-style.css">
     <link rel="stylesheet" href="./assets/style/layout.css" />
     <!-- <link rel="stylesheet" href="./assets/style/style.css" /> -->
 </head>
@@ -152,8 +152,18 @@
                         <button class="button" id="submit">Search</button>
                     </section>
                     <!-- </div> -->
+                    <section id="park-list">
+                        <div class="grid-x align-justify">
+                        <h4>Search Results:</h4>
+                        <button id="clear" class="button">Clear Results</button>  
+                    </div>                      
+                    </section>
+                <!-- </div> -->
                     <!-- </div> -->
                 </div>
+
+                <!-- <div class="cell large-12 add-padding"> -->
+            
 
                 <!-- map + saved parks -->
                 <div class="cell small-12 medium-6 large-8 add-padding">
@@ -183,18 +193,9 @@
                     <section>
                         <header id="saved-parks-header">
                             <h2>Saved Parks</h2>
-                            <button id="remove-all-button" class="alert button">Clear All</button>
+                            <button id="remove-all-button" class="alert button">Clear Saved Parks</button>
                         </header>
                         <section id="saved-parks"></section>
-                </div>
-
-                <div class="cell large-12 add-padding">
-                    <section id="park-list">
-                        <div class="grid-x align-justify">
-                        <h4>Search Results:</h4>
-                        <button id="clear" class="button">Clear Results</button>  
-                    </div>                      
-                    </section>
                 </div>
 
 
