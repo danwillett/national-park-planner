@@ -14,6 +14,7 @@ function loadSavedSearches(parksToLoad) {
   var savedKeys = Object.keys(parksToLoad)
   console.log(savedParksEl)
 
+  // creates a new card for each park saved in local storage
   for (var i = 0; i < savedKeys.length; i++) {
 
     var parkDetails = parksToLoad[savedKeys[i]]
@@ -106,6 +107,7 @@ function loadSavedSearches(parksToLoad) {
 
   })
 
+  // pins park to map from saved section and scrolls to map
   $('.pin-button').on('click', function (event) {
     event.preventDefault();
     event.stopPropagation();
@@ -114,9 +116,13 @@ function loadSavedSearches(parksToLoad) {
     var savedParkCode = [{ parkCode: cardContainer.attr("data-code") }];
     console.log(savedParkCode)
     addParksToMap(savedParkCode)
+    $([document.documentElement, document.body]).animate({
+      scrollTop: $("#map").offset().top
+  }, 500);
 
   })
 
+  // clears all saved parks from storage and saved section
   $('#remove-all-button').on('click', function (event) {
     event.preventDefault();
     event.stopPropagation();
@@ -125,9 +131,9 @@ function loadSavedSearches(parksToLoad) {
     $('.card').remove();
 
   })
-
 }
 
+// sets text and other style for map park pins
 function featureStyle(feature) {
   console.log(feature)
   return [
@@ -137,7 +143,6 @@ function featureStyle(feature) {
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
         src: './assets/mapping-parks/images/map-icon.png',
-        //src: './images/map-icon.png',
         scale: 0.03
       }),
       text: new ol.style.Text({
@@ -157,6 +162,7 @@ function featureStyle(feature) {
   ]
 }
 
+// wraps park names if they are long
 function labelStyle(str, width, spaceReplacer) {
   // https://stackoverflow.com/questions/14484787/wrap-text-in-javascript
 
@@ -184,25 +190,17 @@ function labelStyle(str, width, spaceReplacer) {
 function makeFeatures(object) {
   console.log(object.data.length)
   var parkPins = {};
-  var parkPinsNoLabel = {};
 
   // creates map feature objects for each park including information that will be displayed in modals
   
   for (var i = 0; i < object.data.length; i++) {
-    // console.log(i);
-
     var parkName = object.data[i].fullName;
     var parkImage = object.data[i].images[0].url;
     var parkDescription = object.data[i].description;
     var parkLocation = object.data[i].addresses[0].city + ', ' + object.data[i].addresses[0].stateCode;
     var parkCode = object.data[i].parkCode;
-    console.log(parkImage)
 
-    console.log(parkName)
-
-    // console.log(object.data[i])
     var latitude = object.data[i].latitude;
-    // console.log(latitude)
     var longitude = object.data[i].longitude;
 
     var addFeature = new ol.Feature({
@@ -215,18 +213,13 @@ function makeFeatures(object) {
       description: parkDescription
 
     });
-    console.log(addFeature)
-
 
     addFeature.setStyle(featureStyle(addFeature['values_']))
-    console.log(addFeature)
-
     parkPins[parkName] = addFeature
     
   }
 
-  // combines map features into a single vector layer that will be added to the map
-  console.log(Object.values(parkPins)[0])  
+  // combines map features into a single vector layer that will be added to the map 
 
 var pins = new ol.layer.Vector({
         source: new ol.source.Vector({
@@ -234,11 +227,8 @@ var pins = new ol.layer.Vector({
         })
       })
 
-
+      // adds features to map
   map.addLayer(pins)
-  // console.log(pins)
-  // adds the location pins to the map
-  
 
   // generates a new view to zoom in on the parks
   var ext = addFeature.getGeometry().getExtent();
@@ -307,9 +297,11 @@ var pins = new ol.layer.Vector({
     });
   });
 
+  // gets search items
   var searchListEl = document.getElementById('search-list')
   console.log(searchListEl)
-
+  // adds event listener to pull up modal if there was a search
+if (searchListEl !== null) {
   searchListEl.addEventListener('click', function(event){
     event.preventDefault()
     event.stopPropagation()
@@ -363,18 +355,14 @@ var pins = new ol.layer.Vector({
       console.log(savedParks)
 
       loadSavedSearches(savedParks);
-      $(previewEl).foundation('close');
+      $(previewEl).foundation('close')
     }, { once: true })
   })
+}
+  
 };
 
-
-    
-    
-  
-
-
-// function adds 
+// function adds parks to map. Called in other js file
 function addParksToMap(parksObject) {
   console.log(parksObject)
   console.log(parksObject.length)
@@ -383,10 +371,7 @@ function addParksToMap(parksObject) {
   var apiParam = '&api_key=CrgafHnw6fYelIdITc4yR0KkwUU5rHWRnGKyi8xj';
 
   var selectedParks = [];
-  // creating final list of park codes to be used in fetch call
-
-
-  
+  // creating final list of park codes to be used in fetch call 
     for (var pc = 0; pc < parksObject.length; pc++) {
       selectedParks.push(parksObject[pc].parkCode);
     }
@@ -405,6 +390,7 @@ function addParksToMap(parksObject) {
     })
 }
 
+// generates map
 var map = new ol.Map({
   layers: [
     new ol.layer.Tile({ source: new ol.source.OSM() }),
@@ -416,61 +402,6 @@ var map = new ol.Map({
   target: 'map'
 
 });
-
-
-
-// map.on('moveend', function(e) {
-
-//   var map = new ol.Map({
-//     layers: [
-//       new ol.layer.Tile({ source: new ol.source.OSM() }),
-//     ],
-//     view: new ol.View({
-//       center: ol.proj.fromLonLat([-100.622990, 48.223772]),
-//       zoom: 3,
-//     }),
-//     target: 'map',
-//     style: zoomStyle
-  
-//   });
-// });
-
-// var zoomStyle = function () {
-//   var zoom = map.getView().getZoom();
-//   var font_size = zoom * 15;
-//   console.log(font_size)
-//   return [
-//     new ol.style.Style({
-//       text: new ol.style.Text({
-//         font: font_size + 'px Calibri',
-//       })
-//     })   
-//   ]
-// }
-
-
-// var currZoom = map.getView().getZoom();
-//   zoomStyle(currZoom)
-
-// map.on('moveend', function(e) {
-//   console.log("map moved")
-//   var currZoom = map.getView().getZoom();
-//   zoomStyle(currZoom)
-  
-//   // map.getFeatures()
-//   // feature.getStyle()
-//   map.addFeature((zoomStyle))
-
-  
-// });
-
-// var parkList = [{ park: "yosemite", parkCode: "yose", url: "someurl" }]
-
-// addParksToMap(parkList)
-
-// var parkList = [{ park: "yosemite", parkCode: "yose", url: "someurl" }, { park: "yosemite", parkCode: "chis", url: "someurl" }, { park: "yosemite", parkCode: "fopo", url: "someurl" }]
-
-// addParksToMap(parkList)
 
 
 
