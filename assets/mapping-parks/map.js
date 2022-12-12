@@ -25,11 +25,11 @@ function loadSavedSearches(parksToLoad) {
       $(cardEl).css("width", "300px");
       $(cardEl).attr("id", parkDetails.name)
       $(cardEl).attr("data-code", parkDetails.code)
-      
+
 
       var headEl = $('<div>')
       $(headEl).attr("class", "card-divider")
-      
+
       var parkTitleEl = $('<h4>');
       $(parkTitleEl).text(parkTitle)
       $(headEl).append(parkTitleEl)
@@ -49,7 +49,7 @@ function loadSavedSearches(parksToLoad) {
 
 
       var locEl = $('<div>')
-      $(locEl).css({ "display": "flex", "flex-direction": "row", "flex-wrap": "wrap", "justify-content": "space-between", "align-items":"center" })
+      $(locEl).css({ "display": "flex", "flex-direction": "row", "flex-wrap": "wrap", "justify-content": "space-between", "align-items": "center" })
 
       var locName = $('<h5>')
       $(locName).text(parkDetails.location)
@@ -66,7 +66,7 @@ function loadSavedSearches(parksToLoad) {
       $(infoEl).append(pEl)
 
       var navEl = $('<nav>')
-      $(navEl).css({ "display": "flex", "flex-direction": "row", "flex-wrap": "wrap", "justify-content": "space-between", "align-items":"center" })
+      $(navEl).css({ "display": "flex", "flex-direction": "row", "flex-wrap": "wrap", "justify-content": "space-between", "align-items": "center" })
 
       var linkEl = $('<a>');
       linkEl.text("Check it out!")
@@ -108,13 +108,13 @@ function loadSavedSearches(parksToLoad) {
     event.stopPropagation();
     console.log("hey")
     var cardContainer = $(this).parent().parent().parent()
-    var savedParkCode = [{parkCode:cardContainer.attr("data-code")}];
+    var savedParkCode = [{ parkCode: cardContainer.attr("data-code") }];
     console.log(savedParkCode)
     addParksToMap(savedParkCode)
 
   })
 
-  $('#remove-all-button').on('click', function(event){
+  $('#remove-all-button').on('click', function (event) {
     event.preventDefault();
     event.stopPropagation();
     localStorage.removeItem("savedParks");
@@ -163,27 +163,79 @@ function makeFeatures(object) {
       description: parkDescription
 
     });
+    console.log(addFeature)
+
+    addFeature.setStyle(featureStyle(addFeature['values_']))
+    console.log(addFeature)
     parkPins[parkName] = addFeature
+    var parkPin = addFeature
+    console.log(parkPin)
   }
 
+
   // combines map features into a single vector layer that will be added to the map
+  console.log(Object.values(parkPins)[0])
 
   var pins = new ol.layer.Vector({
     source: new ol.source.Vector({
       features: Object.values(parkPins)
-    }),
-    style: new ol.style.Style({
-      image: new ol.style.Icon({
-        anchor: [0.5, 1],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'fraction',
-        src: './assets/mapping-parks/images/map-icon.png',
-        //src: './images/map-icon.png',
-        scale: 0.03
-      })
     })
   })
-  console.log(pins)
+
+
+  function labelStyle(str, width, spaceReplacer) {
+    // https://stackoverflow.com/questions/14484787/wrap-text-in-javascript
+
+    if (str.length > width) {
+      let p = width;
+      while (p > 0 && str[p] != ' ' && str[p] != '-') {
+        p--;
+      }
+      if (p > 0) {
+        let left;
+        if (str.substring(p, p + 1) == '-') {
+          left = str.substring(0, p + 1);
+        } else {
+          left = str.substring(0, p);
+        }
+        const right = str.substring(p + 1);
+        return left + spaceReplacer + labelStyle(right, width, spaceReplacer);
+      }
+    }
+    return str;
+
+  }
+
+  function featureStyle(feature) {
+    console.log(feature)
+    return [
+      new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5, 1],
+          anchorXUnits: 'fraction',
+          anchorYUnits: 'fraction',
+          src: './assets/mapping-parks/images/map-icon.png',
+          //src: './images/map-icon.png',
+          scale: 0.03
+        }),
+        text: new ol.style.Text({
+          // font: fontSizeOnZoom + 'px Calibri',
+          text: labelStyle(feature['name'], 20, "\n"),
+          offsetY: '20',
+          placement: 'line',
+          fill: new ol.style.Fill({
+            color: '#000'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#fff',
+            width: 3
+          })
+        }),
+      })
+    ]
+  }
+
+  // console.log(pins)
   // adds the location pins to the map
   map.addLayer(pins)
 
@@ -253,7 +305,6 @@ function makeFeatures(object) {
       }, { once: true })
     });
   });
-
 }
 
 // function adds 
@@ -268,10 +319,10 @@ function addParksToMap(parksObject) {
   // creating final list of park codes to be used in fetch call
 
 
-    for (var pc = 0; pc < parksObject.length; pc++) {
-      selectedParks.push(parksObject[pc].parkCode);
-    }
-  
+  for (var pc = 0; pc < parksObject.length; pc++) {
+    selectedParks.push(parksObject[pc].parkCode);
+  }
+
   console.log(selectedParks)
 
   // gets park information from final list of park codes
@@ -296,6 +347,27 @@ var map = new ol.Map({
     zoom: 3,
   }),
   target: 'map',
+});
+
+
+var zoomStyle = function (zoom){
+  var font_size = zoom * 10;
+  console.log(font_size)
+  return [
+    new ol.style.Style({
+      text: new ol.style.Text({
+        font: font_size + 'px Calibri',
+      })
+    })   
+  ]
+}
+
+map.on('moveend', function(e) {
+  console.log("map moved")
+  var currZoom = map.getView().getZoom();
+  zoomStyle(currZoom)
+  map.addStyle(zoomStyle)
+  
 });
 
 // var parkList = [{ park: "yosemite", parkCode: "yose", url: "someurl" }]
