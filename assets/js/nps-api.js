@@ -173,7 +173,7 @@ function getParksForChosenAmenity(state, data) {
 function getCommonParks() {
     var parkEl = {
         name: "",
-        code: "",
+        parkCode: "",
         url: ""
     }
 
@@ -184,7 +184,7 @@ function getCommonParks() {
             if (parksForChosenActivity[i].park === parksForChosenAmenity[j].park) {
                 parkEl = {
                     park: parksForChosenAmenity[j].park,
-                    code: parksForChosenAmenity[j].parkCode,
+                    parkCode: parksForChosenAmenity[j].parkCode,
                     url: parksForChosenAmenity[j].url
                 }
                 //check if it already exists.  If not, add it
@@ -202,6 +202,8 @@ function getCommonParks() {
         }
     }
 }
+
+
 
 
 //Get all parks of the state - used when the user just give the state and do not choose any activity or amenity
@@ -230,8 +232,9 @@ function createFinalParkList() {
         var item = $('<li>');
         var park = $('<a>');
 
-        park.attr('href', finalParkList[x].url);
-        park.attr('target', '_blank');
+        // park.attr('href', finalParkList[x].url);
+        // park.attr('target', '_blank');
+        park.attr('id', finalParkList[x].parkCode)
         park.text(finalParkList[x].park);
 
         item.append(park);
@@ -244,20 +247,24 @@ function displayFinalParkList() {
 
     console.log(finalParkList);
 
+
+    
     if (finalParkList.length > 0) {
       
 
         if (pList === "") {
-
-            pList = $('<ul>');
-            createFinalParkList();
-        } else {
-
-            pList.remove();
-            pList = $('<ul>');
-            createFinalParkList();
-        }
-        parkList.append(pList);
+       
+        pList = $('<ul>');
+        pList.attr('id', 'search-list')
+        createFinalParkList();
+    } else {
+       
+        pList.remove();
+        pList = $('<ul>');
+        pList.attr('id', 'search-list')
+        createFinalParkList();
+    }
+    parkList.append(pList);
 
         //display parks on the lsit on the map
         addParksToMap(finalParkList);

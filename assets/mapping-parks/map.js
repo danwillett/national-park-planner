@@ -25,11 +25,11 @@ function loadSavedSearches(parksToLoad) {
       $(cardEl).css("width", "300px");
       $(cardEl).attr("id", parkDetails.name)
       $(cardEl).attr("data-code", parkDetails.code)
-      
+
 
       var headEl = $('<div>')
       $(headEl).attr("class", "card-divider")
-      
+
       var parkTitleEl = $('<h4>');
       $(parkTitleEl).text(parkTitle)
       $(headEl).append(parkTitleEl)
@@ -49,7 +49,7 @@ function loadSavedSearches(parksToLoad) {
 
 
       var locEl = $('<div>')
-      $(locEl).css({ "display": "flex", "flex-direction": "row", "flex-wrap": "wrap", "justify-content": "space-between", "align-items":"center" })
+      $(locEl).css({ "display": "flex", "flex-direction": "row", "flex-wrap": "wrap", "justify-content": "space-between", "align-items": "center" })
 
       var locName = $('<h5>')
       $(locName).text(parkDetails.location)
@@ -66,7 +66,7 @@ function loadSavedSearches(parksToLoad) {
       $(infoEl).append(pEl)
 
       var navEl = $('<nav>')
-      $(navEl).css({ "display": "flex", "flex-direction": "row", "flex-wrap": "wrap", "justify-content": "space-between", "align-items":"center" })
+      $(navEl).css({ "display": "flex", "flex-direction": "row", "flex-wrap": "wrap", "justify-content": "space-between", "align-items": "center" })
 
       var linkEl = $('<a>');
       linkEl.text("Check it out!")
@@ -108,13 +108,13 @@ function loadSavedSearches(parksToLoad) {
     event.stopPropagation();
     console.log("hey")
     var cardContainer = $(this).parent().parent().parent()
-    var savedParkCode = [{parkCode:cardContainer.attr("data-code")}];
+    var savedParkCode = [{ parkCode: cardContainer.attr("data-code") }];
     console.log(savedParkCode)
     addParksToMap(savedParkCode)
 
   })
 
-  $('#remove-all-button').on('click', function(event){
+  $('#remove-all-button').on('click', function (event) {
     event.preventDefault();
     event.stopPropagation();
     localStorage.removeItem("savedParks");
@@ -125,17 +125,66 @@ function loadSavedSearches(parksToLoad) {
 
 }
 
+function featureStyle(feature) {
+  console.log(feature)
+  return [
+    new ol.style.Style({
+      image: new ol.style.Icon({
+        anchor: [0.5, 1],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'fraction',
+        src: './assets/mapping-parks/images/map-icon.png',
+        //src: './images/map-icon.png',
+        scale: 0.03
+      }),
+      text: new ol.style.Text({
+        text: labelStyle(feature['name'], 20, "\n"),
+        scale: 1,
+        offsetY: '20',
+        placement: 'line',
+        fill: new ol.style.Fill({
+          color: '#000'
+        }),
+        stroke: new ol.style.Stroke({
+          color: '#fff',
+          width: 3
+        })
+      }),
+    })
+  ]
+}
 
+function labelStyle(str, width, spaceReplacer) {
+  // https://stackoverflow.com/questions/14484787/wrap-text-in-javascript
+
+  if (str.length > width) {
+    let p = width;
+    while (p > 0 && str[p] != ' ' && str[p] != '-') {
+      p--;
+    }
+    if (p > 0) {
+      let left;
+      if (str.substring(p, p + 1) == '-') {
+        left = str.substring(0, p + 1);
+      } else {
+        left = str.substring(0, p);
+      }
+      const right = str.substring(p + 1);
+      return left + spaceReplacer + labelStyle(right, width, spaceReplacer);
+    }
+  }
+  return str;
+
+}
 
 // this function adds pin points for the filtered park locations to the map
 function makeFeatures(object) {
   console.log(object.data.length)
   var parkPins = {};
+  var parkPinsNoLabel = {};
 
   // creates map feature objects for each park including information that will be displayed in modals
-  var parkPins = {};
-
-  // creates map feature objects for each park including information that will be displayed in modals
+  
   for (var i = 0; i < object.data.length; i++) {
     // console.log(i);
 
@@ -163,29 +212,30 @@ function makeFeatures(object) {
       description: parkDescription
 
     });
+    console.log(addFeature)
+
+
+    addFeature.setStyle(featureStyle(addFeature['values_']))
+    console.log(addFeature)
+
     parkPins[parkName] = addFeature
+    
   }
 
   // combines map features into a single vector layer that will be added to the map
+  console.log(Object.values(parkPins)[0])  
 
-  var pins = new ol.layer.Vector({
-    source: new ol.source.Vector({
-      features: Object.values(parkPins)
-    }),
-    style: new ol.style.Style({
-      image: new ol.style.Icon({
-        anchor: [0.5, 1],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'fraction',
-        src: './assets/mapping-parks/images/map-icon.png',
-        //src: './images/map-icon.png',
-        scale: 0.03
+var pins = new ol.layer.Vector({
+        source: new ol.source.Vector({
+          features: Object.values(parkPins)
+        })
       })
-    })
-  })
-  console.log(pins)
-  // adds the location pins to the map
+
+
   map.addLayer(pins)
+  // console.log(pins)
+  // adds the location pins to the map
+  
 
   // generates a new view to zoom in on the parks
   var ext = addFeature.getGeometry().getExtent();
@@ -202,7 +252,6 @@ function makeFeatures(object) {
     // when pixels with pins are selected, it will show the selected park's modal preview
     map.forEachFeatureAtPixel(map.getEventPixel(e), function (feature, layer) {
       console.log(feature)
-
       // adds content to empty div element containing modal structure
       var previewEl = document.getElementById('park-preview');
 
@@ -255,7 +304,71 @@ function makeFeatures(object) {
     });
   });
 
-}
+  var searchListEl = document.getElementById('search-list')
+  console.log(searchListEl)
+
+  searchListEl.addEventListener('click', function(event){
+    event.preventDefault()
+    event.stopPropagation()
+    console.log(event.target.textContent)
+    var feature = parkPins[event.target.textContent]
+    console.log(parkPins)
+    // adds content to empty div element containing modal structure
+    var previewEl = document.getElementById('park-preview');
+
+    var parkTitleEl = document.getElementById('park-title');
+    parkTitleEl.textContent = feature.values_.name;
+
+    var locationEl = document.getElementById('location');
+    locationEl.textContent = feature.values_.location;
+
+    var backgroundImageEl = $('#park-image');
+    $(backgroundImageEl).attr("class", "savedImages");
+    $(backgroundImageEl).attr("src", feature.values_.image)
+
+    var parkDescriptionEl = document.getElementById('park-description');
+    parkDescriptionEl.textContent = feature.values_.description;
+
+    var parkWebsiteLinkEl = document.getElementById('park-website');
+    var link = feature.values_.url;
+    parkWebsiteLinkEl.setAttribute('href', link)
+    parkWebsiteLinkEl.setAttribute('target', '_blank')
+    parkWebsiteLinkEl.textContent = 'Check it out!'
+
+    // call foundation method to open the modal when clicked
+    $(previewEl).foundation('open')
+
+    // set park into local storage
+    var saveButton = document.getElementById('save-button')
+    saveButton.addEventListener('click', function (event) {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      console.log(localStorage.getItem("savedParks"))
+
+      var code = feature.values_.code;
+      console.log(code)
+      thisPark = feature.values_;
+
+      console.log(thisPark)
+      console.log(savedParks)
+      savedParks[feature.values_.name] = thisPark
+
+      localStorage.setItem("savedParks", JSON.stringify(savedParks))
+      savedParks = JSON.parse(localStorage.getItem("savedParks"));
+      console.log(savedParks)
+
+      loadSavedSearches(savedParks);
+    }, { once: true })
+  })
+};
+
+
+    
+    
+  
+
 
 // function adds 
 function addParksToMap(parksObject) {
@@ -267,6 +380,7 @@ function addParksToMap(parksObject) {
 
   var selectedParks = [];
   // creating final list of park codes to be used in fetch call
+
 
   
     for (var pc = 0; pc < parksObject.length; pc++) {
@@ -290,14 +404,61 @@ function addParksToMap(parksObject) {
 var map = new ol.Map({
   layers: [
     new ol.layer.Tile({ source: new ol.source.OSM() }),
-
   ],
   view: new ol.View({
     center: ol.proj.fromLonLat([-100.622990, 48.223772]),
     zoom: 3,
   }),
-  target: 'map',
+  target: 'map'
+
 });
+
+
+
+// map.on('moveend', function(e) {
+
+//   var map = new ol.Map({
+//     layers: [
+//       new ol.layer.Tile({ source: new ol.source.OSM() }),
+//     ],
+//     view: new ol.View({
+//       center: ol.proj.fromLonLat([-100.622990, 48.223772]),
+//       zoom: 3,
+//     }),
+//     target: 'map',
+//     style: zoomStyle
+  
+//   });
+// });
+
+// var zoomStyle = function () {
+//   var zoom = map.getView().getZoom();
+//   var font_size = zoom * 15;
+//   console.log(font_size)
+//   return [
+//     new ol.style.Style({
+//       text: new ol.style.Text({
+//         font: font_size + 'px Calibri',
+//       })
+//     })   
+//   ]
+// }
+
+
+// var currZoom = map.getView().getZoom();
+//   zoomStyle(currZoom)
+
+// map.on('moveend', function(e) {
+//   console.log("map moved")
+//   var currZoom = map.getView().getZoom();
+//   zoomStyle(currZoom)
+  
+//   // map.getFeatures()
+//   // feature.getStyle()
+//   map.addFeature((zoomStyle))
+
+  
+// });
 
 // var parkList = [{ park: "yosemite", parkCode: "yose", url: "someurl" }]
 
