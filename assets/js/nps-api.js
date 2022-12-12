@@ -170,7 +170,7 @@ function getParksForChosenAmenity(state, data) {
 function getCommonParks() {
     var parkEl = {
         name: "",
-        code: "",
+        parkCode: "",
         url: ""
     }
 
@@ -179,7 +179,7 @@ function getCommonParks() {
             if (parksForChosenActivity[i].park === parksForChosenAmenity[j].park) {
                 parkEl = {
                     park: parksForChosenAmenity[j].park,
-                    code: parksForChosenAmenity[j].parkCode,
+                    parkCode: parksForChosenAmenity[j].parkCode,
                     url: parksForChosenAmenity[j].url
                 }
                 //check if it already exists.  If not, add it
@@ -196,6 +196,8 @@ function getCommonParks() {
         }
     }
 }
+
+
 
 
 //Get all parks of the state - used when the user just give the state and do not choose any activity or amenity
@@ -222,8 +224,9 @@ function createFinalParkList() {
         var item = $('<li>');
         var park = $('<a>');
 
-        park.attr('href', finalParkList[x].url);
-        park.attr('target', '_blank');
+        // park.attr('href', finalParkList[x].url);
+        // park.attr('target', '_blank');
+        park.attr('id', finalParkList[x].parkCode)
         park.text(finalParkList[x].park);
 
         item.append(park);
@@ -239,11 +242,13 @@ function displayFinalParkList() {
     if (pList === "") {
        
         pList = $('<ul>');
+        pList.attr('id', 'search-list')
         createFinalParkList();
     } else {
        
         pList.remove();
         pList = $('<ul>');
+        pList.attr('id', 'search-list')
         createFinalParkList();
     }
     parkList.append(pList);
