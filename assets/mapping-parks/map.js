@@ -261,7 +261,7 @@ function addParksToMap(parksObject) {
   var selectedParks = [];
   // creating final list of park codes to be used in fetch call
 
-  if (parksObject.length > 1 ){
+  if (parksObject.length > 0 ){
     for (var pc = 0; pc < parksObject.length; pc++) {
       selectedParks.push(parksObject[pc].parkCode);
     }
