@@ -299,6 +299,7 @@ var pins = new ol.layer.Vector({
         console.log(savedParks)
 
         loadSavedSearches(savedParks);
+        $(previewEl).foundation('close')
       }, { once: true })
     });
   });
@@ -381,10 +382,11 @@ function addParksToMap(parksObject) {
   // creating final list of park codes to be used in fetch call
 
 
-  for (var pc = 0; pc < parksObject.length; pc++) {
-    selectedParks.push(parksObject[pc].parkCode);
-  }
-
+  
+    for (var pc = 0; pc < parksObject.length; pc++) {
+      selectedParks.push(parksObject[pc].parkCode);
+    }
+  
   console.log(selectedParks)
 
   // gets park information from final list of park codes
