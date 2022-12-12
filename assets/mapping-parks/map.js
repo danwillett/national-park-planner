@@ -363,6 +363,7 @@ var pins = new ol.layer.Vector({
       console.log(savedParks)
 
       loadSavedSearches(savedParks);
+      $(previewEl).foundation('close');
     }, { once: true })
   })
 };

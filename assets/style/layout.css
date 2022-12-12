@@ -1,5 +1,10 @@
 :root {
     --nav-teal: #2c3840;
+    --grey: rgb(67, 65, 65);
+    --brown: brown;
+    --herotext: #fefefe;
+    --footertext: #fff;
+    --titletext: rgb(112,31,40);
 }
 
 * {
@@ -24,7 +29,7 @@ ul li {
 } */
 
 .hero-section-text h3 {
-    color: #fefefe;
+    color: var(--herotext);
 }
 
 .dropdown-pane {
@@ -53,7 +58,7 @@ ul li {
 }
 
 #park-list a {
-    color:rgb(67, 65, 65);
+    color:var(--grey);
 }
 
 /* duplicate code */
@@ -84,19 +89,20 @@ body{
   p{
     font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
     font-weight:100px;
-    color:rgb(67, 65, 65);
+    color:var(--grey);
   }
   
   h2,h3,h4{
     font-family: Georgia,Times,"Times New Roman",serif;
     font-weight: bold;
-    color:rgb(67, 65, 65);
+    /* color:var(--grey); */
+    color: var(--titletext);
   }
 
   
   .required-field {
     font-style: italic;
-    color: brown;
+    color: var(--brown);
   }
   
   .button{
@@ -106,7 +112,7 @@ body{
   }
   
   #no-park{
-    color:brown;
+    color:var(--brown);
     font-weight: bold;
     font-style: italic;
   }
@@ -115,7 +121,7 @@ body{
   #remove-all-button,
   #clear, 
   #save-button {
-    color: #fff;
+    color: var(--footertext);
     background-color:rgb(165, 118, 42);
   }
   
@@ -139,9 +145,15 @@ body{
     }
   
     .hero-section-text {
-      color: #fefefe;
+      color: var(--herotext);
+      font-weight: bold;
       text-shadow: 1px 1px 2px #0a0a0a;
       padding: 5rem;
+    }
+
+    .hero-section-text h1{
+      font-size:100px;
+      background-color: var(--titletext);
     }
   
     /* nav bar */
@@ -157,7 +169,7 @@ body{
     }
     
     .topbar-responsive .topbar-responsive-logo {
-      color: #fefefe;
+      color: var(--herotext);
       vertical-align: middle;
     }
     
@@ -170,7 +182,7 @@ body{
     }
     
     .topbar-responsive .menu a {
-      color: #fefefe;
+      color:var(--herotext);
       transition: color 0.15s ease-in;
     }
     
@@ -185,8 +197,8 @@ body{
     }
     
     .topbar-responsive .menu .topbar-responsive-button {
-      color: #fefefe;
-      border-color: #fefefe;
+      color: var(--herotext);
+      border-color: var(--herotext);
       border-radius: 5000px;
       transition: color 0.15s ease-in, border-color 0.15s ease-in;
     }
@@ -289,7 +301,7 @@ body{
       width: 100vw;
       padding-top: 15px;
       padding-bottom: 15px;
-      color: #fff;
+      color: var(--footertext);
       list-style-type: none;
   }
   
@@ -306,11 +318,11 @@ body{
     font-weight: 500;
     /* text-transform: capitalize; */
     line-height: 3rem;
-    color: #fff;
+    color: var(--footertext);
   }
 
   .footer-content a{
-    color: #fff;
+    color: var(--footertext);
   }
   
   
