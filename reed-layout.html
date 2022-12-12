@@ -21,7 +21,7 @@
     <!-- custom stylesheets -->
     <link rel="stylesheet" href="./assets/style/multi-select-dropdown.css" />
     <link rel="stylesheet" href="./assets/style/layout.css" />
-    <link rel="stylesheet" href="./assets/style/style.css" />
+    <!-- <link rel="stylesheet" href="./assets/style/style.css" /> -->
 </head>
 
 <body>
@@ -72,7 +72,7 @@
                 </div>
 
                 <!-- trip planner -->
-                <div class="cell small-12 large-6 add-padding">
+                <div class="cell small-12 medium-6 large-4 add-padding">
                     <!-- <div class="container-2"> -->
                     <!-- <div class="box-3"> -->
                     <section class="main-content" id="plan-your-trip">
@@ -156,10 +156,10 @@
                 </div>
 
                 <!-- map + saved parks -->
-                <div class="cell small-12 large-6 add-padding">
+                <div class="cell small-12 medium-6 large-8 add-padding">
                     <!-- map -->
-                    <div class="responsive-embed" id="map-div">
-                        <div class="grid-x">
+                    <div class="grid-x">
+                        <div class="responsive-embed" id="map-div">
                             <div class="map" id="map"></div>
                         </div>
                     </div>
@@ -190,11 +190,10 @@
 
                 <div class="cell large-12 add-padding">
                     <section id="park-list">
+                        <div class="grid-x align-justify">
                         <h4>Search Results:</h4>
-                        <div class="columns">
-                        </div>
-                        <button id="clear" class="button">Clear Results</button>
-
+                        <button id="clear" class="button">Clear Results</button>  
+                    </div>                      
                     </section>
                 </div>
 
