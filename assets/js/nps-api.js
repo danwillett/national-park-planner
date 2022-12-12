@@ -392,6 +392,11 @@ function getSelectedAmenities() {
     return amenities;
 }
 
+stateEl.on('click', function(event){
+    if(stateEl.val() !== "")
+     requiredAlert.text("");
+});
+
 //Event Listener for Find Park button
 submitBtn.on('click', function (event) {
     console.log(requiredAlert.text());
@@ -402,6 +407,8 @@ submitBtn.on('click', function (event) {
         console.log("State is a required field.  Please enter a valid state.");
         requiredAlert.text("You must select at least one state to complete search!");
         return;
+    }else {
+        requiredAlert.text("");
     }
     var stateCode = "";
 
