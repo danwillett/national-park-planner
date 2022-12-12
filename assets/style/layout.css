@@ -27,6 +27,10 @@ ul li {
     color: #fefefe;
 }
 
+.dropdown-pane {
+    width: 27rem;
+}
+
 .add-padding {
     padding: 1.5rem;
 }
