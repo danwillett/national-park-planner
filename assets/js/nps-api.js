@@ -109,6 +109,7 @@ function getAmenitiesForCategory(category) {
 
 //Get parks from data returned from API for activities
 function getParksForChosenActivity(state, data) {
+    parksForChosenActivity.length = 0;
     console.log("activity..." + state);
     for (var i = 0; i < data.data.length; i++) {
         var parkEl = {
@@ -119,9 +120,10 @@ function getParksForChosenActivity(state, data) {
         }
 
         for (var x = 0; x < data.data[i].parks.length; x++) {
-           // if (data.data[i].parks[x].states.match(state)) {
+            // if (data.data[i].parks[x].states.match(state)) {
             var pState = data.data[i].parks[x].states;
-            if (state.toString().match(pState)) {
+            if (state.toString().match(pState) && pState !== "") {
+                console.log("pState = " + pState + " And state = " + state);
                 parkEl = {
                     act: data.data[i].name,
                     park: data.data[i].parks[x].fullName,
@@ -139,6 +141,7 @@ function getParksForChosenActivity(state, data) {
 
 //Get parks from data returned from API for amenities
 function getParksForChosenAmenity(state, data) {
+    parksForChosenAmenity.length = 0;
 
     for (var i = 0; i < data.data.length; i++) {
 
@@ -150,7 +153,7 @@ function getParksForChosenAmenity(state, data) {
             url: ""
         }
         for (var x = 0; x < data.data[i][0].parks.length; x++) {
-          //  if (data.data[i][0].parks[x].states.match(state)) {
+            //  if (data.data[i][0].parks[x].states.match(state)) {
             var pState = data.data[i][0].parks[x].states;
             if (state.toString().match(pState)) {
                 parkEl = {
@@ -174,6 +177,8 @@ function getCommonParks() {
         url: ""
     }
 
+    finalParkList.length = 0;
+
     for (var i = 0; i < parksForChosenActivity.length; i++) {
         for (var j = 0; j < parksForChosenAmenity.length; j++) {
             if (parksForChosenActivity[i].park === parksForChosenAmenity[j].park) {
@@ -189,6 +194,7 @@ function getCommonParks() {
                         exists = true;
                 }
                 if (!exists) {
+                  
                     finalParkList[finalParkList.length] = parkEl;
                 }
             }
@@ -205,7 +211,9 @@ function getAllParksForState(data) {
         parkCode: "",
         url: ""
     }
-    
+
+    finalParkList.length = 0;
+
     for (var i = 0; i < data.data.length; i++) {
 
         parkEl = {
@@ -236,20 +244,33 @@ function displayFinalParkList() {
 
     console.log(finalParkList);
 
-    if (pList === "") {
-       
-        pList = $('<ul>');
-        createFinalParkList();
-    } else {
-       
-        pList.remove();
-        pList = $('<ul>');
-        createFinalParkList();
-    }
-    parkList.append(pList);
+    if (finalParkList.length > 0) {
+      
 
-    //display parks on the lsit on the map
-    addParksToMap(finalParkList);
+        if (pList === "") {
+
+            pList = $('<ul>');
+            createFinalParkList();
+        } else {
+
+            pList.remove();
+            pList = $('<ul>');
+            createFinalParkList();
+        }
+        parkList.append(pList);
+
+        //display parks on the lsit on the map
+        addParksToMap(finalParkList);
+    }
+    else {
+     
+        if (pList !== "")
+            pList.remove();
+        pList = $('<p>');
+        pList.attr('id', 'no-park');
+        pList.text("No parks were found.");
+        parkList.append(pList);
+    }
 }
 
 //This function will populate finalparkList with list of parks for chosen activites or ameties or both.  
@@ -379,7 +400,7 @@ submitBtn.on('click', function (event) {
     console.log("state = " + state);
     if (state == "") {
         console.log("State is a required field.  Please enter a valid state.");
-        requiredAlert.text("You must select at least one state to complete search!")
+        requiredAlert.text("You must select at least one state to complete search!");
         return;
     }
     var stateCode = "";
@@ -422,7 +443,7 @@ clearBtn.click(function (event) {
 })
 
 function setActivities(activities) {
-    
+
     console.log("setactivities");
     let checkboxes = document.querySelectorAll('input[name="activity"]');
     console.log(checkboxes);
@@ -466,10 +487,10 @@ function restoreLastSearch(lastSearch) {
     // }
 
     //set the state name in display
-     stateEl.val(stateCode);
-     
+    stateEl.val(stateCode);
+
     // populates last searched state in input as placeholder text
-  //  $('input:text').attr('placeholder', "Last searched: " + state)
+    //  $('input:text').attr('placeholder', "Last searched: " + state)
 
     setActivities(lastSearch.activityList);
     setAmenities(lastSearch.amenityList)
@@ -479,7 +500,7 @@ function restoreLastSearch(lastSearch) {
     findParks(lastSearch.state, activities, amenities);
 }
 
-function getStates(){
+function getStates() {
     for (var i = 0; i < stateInfo.length; i++) {
         var opt = $('<option>');
 
