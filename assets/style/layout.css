@@ -45,8 +45,11 @@ ul li {
 }
 
 #park-list ul {
-    /* column-count: 3; */
     margin-left: 0;
+}
+
+#park-list a {
+    color:rgb(67, 65, 65);
 }
 
 /* duplicate code */
@@ -299,6 +302,10 @@ body{
     font-weight: 500;
     /* text-transform: capitalize; */
     line-height: 3rem;
+    color: #fff;
+  }
+
+  .footer-content a{
     color: #fff;
   }
   
