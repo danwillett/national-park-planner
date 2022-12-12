@@ -6,10 +6,10 @@
     box-sizing: border-box;
 }
 
-body {
+/* body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: rgb(246, 238, 228);
-}
+} */
 
 ul li {
     list-style-type: none;
@@ -19,9 +19,9 @@ ul li {
     color: #fff;
 } */
 
-#park-list a {
+/* #park-list a {
     color:rgb(67, 65, 65);
-}
+} */
 
 .hero-section-text h3 {
     color: #fefefe;
@@ -49,8 +49,8 @@ ul li {
     margin-left: 0;
 }
 
-
-
+/* duplicate code */
+/* 
 .footer-content {
     display: flex;
     align-items: center;
@@ -66,7 +66,7 @@ ul li {
     line-height: 3rem;
     color: #fff;
 
-}
+} */
 
 
 body{
@@ -93,7 +93,7 @@ body{
   }
   
   .button{
-    width: 8rem;
+    width: 6rem;
     border-radius: 5px;
     background-color:cadetblue;
   }
@@ -104,10 +104,11 @@ body{
     font-style: italic;
   }
   
-  #remove-button,
+  .remove-button,
   #remove-all-button,
   #clear, 
   #save-button {
+    color: #fff;
     background-color:rgb(165, 118, 42);
   }
   

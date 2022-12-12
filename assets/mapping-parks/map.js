@@ -77,7 +77,9 @@ function loadSavedSearches(parksToLoad) {
 
       var removeButton = $('<button>')
       $(removeButton).text("Remove")
-      $(removeButton).attr("class", "alert button remove-button")
+      // $(removeButton).attr("class", "alert button remove-button")
+            $(removeButton).attr("class", "button remove-button")
+
 
       $(navEl).append(removeButton)
       $(infoEl).append(navEl)
