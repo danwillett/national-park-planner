@@ -429,6 +429,8 @@ stateEl.on('click', function(event){
 submitBtn.on('click', function (event) {
     console.log(requiredAlert.text());
     event.preventDefault();
+    localStorage.removeItem("lastSearch");
+    location.reload();
     var state = stateEl.val();
     console.log("state = " + state);
     if (state == "") {
@@ -472,7 +474,7 @@ submitBtn.on('click', function (event) {
 // clear clear local storage, refresh page
 clearBtn.click(function (event) {
     event.preventDefault();
-    localStorage.removeItem("lastSearch")
+    localStorage.removeItem("lastSearch");
     // localStorage.clear();
     location.reload();
 })

@@ -96,6 +96,7 @@ function loadSavedSearches(parksToLoad) {
   $('.remove-button').on('click', function (event) {
     event.preventDefault();
     event.stopPropagation();
+    location.reload();
 
     var cardContainer = $(this).parent().parent().parent()
     var parentName = cardContainer.attr("id")
