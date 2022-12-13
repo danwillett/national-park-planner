@@ -22,8 +22,8 @@ From the comfort of your couch, outdoorsyISH will help the user explore and find
 ## Installation
 
 You can access:
-1. the file in GitHub repository: https://github.com/danwillett/national-park-planner
-2. the application using this URL: 
+1. the files in GitHub repository: https://github.com/danwillett/national-park-planner
+2. the application using this URL: https://danwillett.github.io/national-park-planner/
 
 ## Usage
 
@@ -48,7 +48,7 @@ To begin the adventure, the user is required to choose one or mulitiple states. 
 ![Screenshot](./assets/images/Screenshot.JPG)
 
 Demo of the project:
-![outdoorsyISH demo]()
+![outdoorsyISH demo](./assets/images/outdoorsyISH.gif)
 
 ## Issues
 
@@ -59,11 +59,11 @@ Demo of the project:
 In version 1.1, we will be adding features to recommendation for fastest routes to a National Park and nearby food and lodging.  
 
 ## Technology
-* Public API Used;
+Public API Used;
  * [National Park Services API](https://www.nps.gov/subjects/developer/index.htm)
  * [Open Layers API](https://openlayers.org)
 
-* CSS Framework Used:
+CSS Framework Used:
  * [Foundation](https://get.foundation/)
 
 ## Credits
@@ -78,15 +78,9 @@ Our Team:
 
 # Resources
 
-[Foudation](https://get.foundation/index.html)
-
-[select menu](https://get.foundation/sites/docs/forms.html)
-[multi-choice dropdown](https://www.codeproject.com/Tips/5162015/Multi-select-Check-Box-List-or-Checkbox-Dropdown-w)
-
-jquery widgets
-autofill](https://jqueryui.com/autocomplete/)
-[autofill multiple](https://jqueryui.com/autocomplete/#multiple)
-[tabs](https://jqueryui.com/tabs/)
+* [Foundation](https://get.foundation/index.html)
+* [NPS API Documentation](https://www.nps.gov/subjects/developer/api-documentation.htm)
+* [Open Layer Documentation](https://openlayers.org/en/latest/apidoc/)
 
 
 
