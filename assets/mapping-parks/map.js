@@ -127,6 +127,8 @@ function loadSavedSearches(parksToLoad) {
   $('#remove-all-button').on('click', function (event) {
     event.preventDefault();
     event.stopPropagation();
+    location.reload();
+
     localStorage.removeItem("savedParks");
     savedParks = {};
     $('.card').remove();
