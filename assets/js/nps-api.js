@@ -131,7 +131,17 @@ function getParksForChosenActivity(state, data) {
                     url: data.data[i].parks[x].url
                 }
 
-                parksForChosenActivity[parksForChosenActivity.length] = parkEl;
+                //remove duplicates
+                // var exists = false;
+                // for (var x = 0; x < parksForChosenActivity.length; x++) {
+                //     if (parkEl.park === parksForChosenActivity[x].park)
+                //         exists = true;
+                // }
+                // if (!exists) {
+                  
+                    parksForChosenActivity[parksForChosenActivity.length] = parkEl;
+                // }
+                
 
             }
         }
@@ -162,7 +172,19 @@ function getParksForChosenAmenity(state, data) {
                     parkCode: data.data[i][0].parks[x].parkCode,
                     url: data.data[i][0].parks[x].url
                 }
-                parksForChosenAmenity[parksForChosenAmenity.length] = parkEl;
+
+                //remove duplicates
+                // var exists = false;
+                // for (var x = 0; x < parksForChosenAmenity.length; x++) {
+                //     if (parkEl.park === parksForChosenAmenity[x].park)
+                //         exists = true;
+                // }
+                // if (!exists) {
+                  
+                    parksForChosenAmenity[parksForChosenAmenity.length] = parkEl;
+                // }
+
+                
             }
         }
     }
@@ -246,7 +268,6 @@ function createFinalParkList() {
 function displayFinalParkList() {
 
     console.log(finalParkList);
-
 
     
     if (finalParkList.length > 0) {
@@ -408,6 +429,8 @@ stateEl.on('click', function(event){
 submitBtn.on('click', function (event) {
     console.log(requiredAlert.text());
     event.preventDefault();
+    localStorage.removeItem("lastSearch");
+    location.reload();
     var state = stateEl.val();
     console.log("state = " + state);
     if (state == "") {
@@ -451,7 +474,7 @@ submitBtn.on('click', function (event) {
 // clear clear local storage, refresh page
 clearBtn.click(function (event) {
     event.preventDefault();
-    localStorage.removeItem("lastSearch")
+    localStorage.removeItem("lastSearch");
     // localStorage.clear();
     location.reload();
 })

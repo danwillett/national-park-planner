@@ -13,9 +13,9 @@ From the comfort of your couch, outdoorsyISH will help the user explore and find
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Known Issues](#knownIssues)
+- [Issues](#issues)
 - [Enhancements](#enhancements)
-- [Technology Used](#technology)
+- [Technology](#technology)
 - [Credits](#credits)
 - [License](#license)
 
@@ -45,47 +45,48 @@ To begin the adventure, the user is required to choose one or mulitiple states. 
 6. The Clear Saved Parks button clears the Saved Parks from the Local Storage and from the application.
 
 
-![Screenshot]()
+![Screenshot](./assets/images/Screenshot.JPG)
 
 Demo of the project:
 ![outdoorsyISH demo]()
 
-## Known Issues
+## Issues
 
 1. The restore from Local Storage is not currently working for Activities.
+2. Resizing map labels with zoom can be improved.
 
 ## Enhancements
 In version 1.1, we will be adding features to recommendation for fastest routes to a National Park and nearby food and lodging.  
 
-## Technology Used
+## Technology
 * Public API Used;
- * ![National Park Services API](https://www.nps.gov/subjects/developer/index.htm)
- * ![Open Layers API](https://openlayers.org)
+ * [National Park Services API](https://www.nps.gov/subjects/developer/index.htm)
+ * [Open Layers API](https://openlayers.org)
 
 * CSS Framework Used:
- * ![Foundation](https://get.foundation/)
+ * [Foundation](https://get.foundation/)
 
 ## Credits
 
 Our Team:
 
-* ![Dan Willett](https://github.com/danwillett)
-* ![Marissa Thompson](https://github.com/marissa424)
-* ![Reed Keyes](https://github.com/rbkeyes)
-* ![Rima Bhumbla](https://github.com/rbhumbla1)
+* [Dan Willett](https://github.com/danwillett)
+* [Marissa Thompson](https://github.com/marissa424)
+* [Reed Keyes](https://github.com/rbkeyes)
+* [Rima Bhumbla](https://github.com/rbhumbla1)
 
 
 # Resources
 
-![Foudation](https://get.foundation/index.html)
+[Foudation](https://get.foundation/index.html)
 
-![select menu](https://get.foundation/sites/docs/forms.html)
-![multi-choice dropdown](https://www.codeproject.com/Tips/5162015/Multi-select-Check-Box-List-or-Checkbox-Dropdown-w)
+[select menu](https://get.foundation/sites/docs/forms.html)
+[multi-choice dropdown](https://www.codeproject.com/Tips/5162015/Multi-select-Check-Box-List-or-Checkbox-Dropdown-w)
 
 jquery widgets
-![autofill](https://jqueryui.com/autocomplete/)
-![autofill multiple](https://jqueryui.com/autocomplete/#multiple)
-![tabs](https://jqueryui.com/tabs/)
+autofill](https://jqueryui.com/autocomplete/)
+[autofill multiple](https://jqueryui.com/autocomplete/#multiple)
+[tabs](https://jqueryui.com/tabs/)
 
 
 
