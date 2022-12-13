@@ -429,8 +429,8 @@ stateEl.on('click', function(event){
 submitBtn.on('click', function (event) {
     console.log(requiredAlert.text());
     event.preventDefault();
-    localStorage.removeItem("lastSearch");
-    location.reload();
+    event.stopPropagation();
+
     var state = stateEl.val();
     console.log("state = " + state);
     if (state == "") {
@@ -439,6 +439,8 @@ submitBtn.on('click', function (event) {
         return;
     }else {
         requiredAlert.text("");
+        localStorage.removeItem("lastSearch");
+        location.reload();
     }
     var stateCode = "";
 
