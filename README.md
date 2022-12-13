@@ -30,7 +30,7 @@ You can access:
 For version 1.0, outdoorsyISH will be taking location, activities and amenities to make suggestion for National Parks for the user. 
 
 To begin the adventure, the user is required to choose one or mulitiple states.  Once the user have chosen a state or states:
-1. The uer can click on Find Parks button to see all the National parks in the state or states.
+1. The user can click on Find Parks button to see all the National parks in the state or states.
 2. In addition, before clicking on Find parks button, the user can choose to select one or multiple activities or one or more amenities or both and then click on Find parks.
 3. If there are parks which provide the choosen activities or amenities or both:
     * The relevant will be displayed in a list.
@@ -43,6 +43,7 @@ To begin the adventure, the user is required to choose one or mulitiple states. 
     * on clicking the remove button, the saved park will be removed from the Saved Parks.
 5. The Clear button next to the List of Parks clears the search selection and the Local Storage so the user can start a new search.
 6. The Clear Saved Parks button clears the Saved Parks from the Local Storage and from the application.
+7. The website is responsive and will work on smaller screens.
 
 
 ![Screenshot](./assets/images/Screenshot.JPG)
